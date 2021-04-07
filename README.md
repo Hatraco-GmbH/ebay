@@ -3,6 +3,7 @@
 ## APIs
 ...created with swagger...
 
+- [Analytics](analytics/README.md)
 - [Finance](finance/README.md)
 - [Fulfillment](fulfillment/README.md)
 - [Inventory](inventory/README.md)
