@@ -7,3 +7,4 @@
 - [Finance](finance/README.md)
 - [Fulfillment](fulfillment/README.md)
 - [Inventory](inventory/README.md)
+- [Taxonomy](taxonomy/README.md)
