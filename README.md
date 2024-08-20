@@ -9,3 +9,7 @@
 - [Inventory](inventory/README.md)
 - [Taxonomy](taxonomy/README.md)
 - [Key Management](keymanagement/README.md)
+
+...created with openapi-client...
+
+- [MetaData](metadata/README.md)
