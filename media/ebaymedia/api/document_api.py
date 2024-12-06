@@ -16,7 +16,6 @@ import re  # noqa: F401
 
 # python 2 and python 3 compatibility library
 import six
-
 from ebaymedia.api_client import ApiClient
 
 
@@ -48,11 +47,15 @@ class DocumentApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        kwargs['_return_http_data_only'] = True
-        if kwargs.get('async_req'):
-            return self.create_document_with_http_info(content_type, **kwargs)  # noqa: E501
+        kwargs["_return_http_data_only"] = True
+        if kwargs.get("async_req"):
+            return self.create_document_with_http_info(
+                content_type, **kwargs
+            )  # noqa: E501
         else:
-            (data) = self.create_document_with_http_info(content_type, **kwargs)  # noqa: E501
+            (data) = self.create_document_with_http_info(
+                content_type, **kwargs
+            )  # noqa: E501
             return data
 
     def create_document_with_http_info(self, content_type, **kwargs):  # noqa: E501
@@ -72,25 +75,26 @@ class DocumentApi(object):
                  returns the request thread.
         """
 
-        all_params = ['content_type', 'body']  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
+        all_params = ["content_type", "body"]  # noqa: E501
+        all_params.append("async_req")
+        all_params.append("_return_http_data_only")
+        all_params.append("_preload_content")
+        all_params.append("_request_timeout")
 
         params = locals()
-        for key, val in six.iteritems(params['kwargs']):
+        for key, val in six.iteritems(params["kwargs"]):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method create_document" % key
                 )
             params[key] = val
-        del params['kwargs']
+        del params["kwargs"]
         # verify the required parameter 'content_type' is set
-        if ('content_type' not in params or
-                params['content_type'] is None):
-            raise ValueError("Missing the required parameter `content_type` when calling `create_document`")  # noqa: E501
+        if "content_type" not in params or params["content_type"] is None:
+            raise ValueError(
+                "Missing the required parameter `content_type` when calling `create_document`"
+            )  # noqa: E501
 
         collection_formats = {}
 
@@ -99,41 +103,47 @@ class DocumentApi(object):
         query_params = []
 
         header_params = {}
-        if 'content_type' in params:
-            header_params['Content-Type'] = params['content_type']  # noqa: E501
+        if "content_type" in params:
+            header_params["Content-Type"] = params["content_type"]  # noqa: E501
 
         form_params = []
         local_var_files = {}
 
         body_params = None
-        if 'body' in params:
-            body_params = params['body']
+        if "body" in params:
+            body_params = params["body"]
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json'])  # noqa: E501
+        header_params["Content-Type"] = (
+            self.api_client.select_header_content_type(  # noqa: E501
+                ["application/json"]
+            )
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_auth']  # noqa: E501
+        auth_settings = ["api_auth"]  # noqa: E501
 
         return self.api_client.call_api(
-            '/document', 'POST',
+            "/document",
+            "POST",
             path_params,
             query_params,
             header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='CreateDocumentResponse',  # noqa: E501
+            response_type="CreateDocumentResponse",  # noqa: E501
             auth_settings=auth_settings,
-            async_req=params.get('async_req'),
-            _return_http_data_only=params.get('_return_http_data_only'),
-            _preload_content=params.get('_preload_content', True),
-            _request_timeout=params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            async_req=params.get("async_req"),
+            _return_http_data_only=params.get("_return_http_data_only"),
+            _preload_content=params.get("_preload_content", True),
+            _request_timeout=params.get("_request_timeout"),
+            collection_formats=collection_formats,
+        )
 
     def get_document(self, document_id, **kwargs):  # noqa: E501
         """get_document  # noqa: E501
@@ -150,11 +160,13 @@ class DocumentApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        kwargs['_return_http_data_only'] = True
-        if kwargs.get('async_req'):
+        kwargs["_return_http_data_only"] = True
+        if kwargs.get("async_req"):
             return self.get_document_with_http_info(document_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_document_with_http_info(document_id, **kwargs)  # noqa: E501
+            (data) = self.get_document_with_http_info(
+                document_id, **kwargs
+            )  # noqa: E501
             return data
 
     def get_document_with_http_info(self, document_id, **kwargs):  # noqa: E501
@@ -173,31 +185,32 @@ class DocumentApi(object):
                  returns the request thread.
         """
 
-        all_params = ['document_id']  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
+        all_params = ["document_id"]  # noqa: E501
+        all_params.append("async_req")
+        all_params.append("_return_http_data_only")
+        all_params.append("_preload_content")
+        all_params.append("_request_timeout")
 
         params = locals()
-        for key, val in six.iteritems(params['kwargs']):
+        for key, val in six.iteritems(params["kwargs"]):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method get_document" % key
                 )
             params[key] = val
-        del params['kwargs']
+        del params["kwargs"]
         # verify the required parameter 'document_id' is set
-        if ('document_id' not in params or
-                params['document_id'] is None):
-            raise ValueError("Missing the required parameter `document_id` when calling `get_document`")  # noqa: E501
+        if "document_id" not in params or params["document_id"] is None:
+            raise ValueError(
+                "Missing the required parameter `document_id` when calling `get_document`"
+            )  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'document_id' in params:
-            path_params['document_id'] = params['document_id']  # noqa: E501
+        if "document_id" in params:
+            path_params["document_id"] = params["document_id"]  # noqa: E501
 
         query_params = []
 
@@ -208,29 +221,32 @@ class DocumentApi(object):
 
         body_params = None
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_auth']  # noqa: E501
+        auth_settings = ["api_auth"]  # noqa: E501
 
         return self.api_client.call_api(
-            '/document/{document_id}', 'GET',
+            "/document/{document_id}",
+            "GET",
             path_params,
             query_params,
             header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='DocumentResponse',  # noqa: E501
+            response_type="DocumentResponse",  # noqa: E501
             auth_settings=auth_settings,
-            async_req=params.get('async_req'),
-            _return_http_data_only=params.get('_return_http_data_only'),
-            _preload_content=params.get('_preload_content', True),
-            _request_timeout=params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            async_req=params.get("async_req"),
+            _return_http_data_only=params.get("_return_http_data_only"),
+            _preload_content=params.get("_preload_content", True),
+            _request_timeout=params.get("_request_timeout"),
+            collection_formats=collection_formats,
+        )
 
-    def upload_document(self, document_id, content_type, **kwargs):  # noqa: E501
+    def upload_document(self, document_id, content_type, files, **kwargs):  # noqa: E501
         """upload_document  # noqa: E501
 
         This method associates the specified file with the specified document ID and uploads the input file. After the file has been uploaded, the processing of the file begins. Supported file types include .PDF, .JPEG/.JPG, and .PNG.<br><br><span class=\"tablenote\"><span style=\"color:#004680\"><strong>Note:</strong></span> The document ID value returned in the response of the <a href=\"/api-docs/commerce/media/resources/document/methods/createDocument\">createDocument</a> method is a required input path parameter for this method. This value is also returned in the <b>location</b> header of the <b>createDocument</b> response payload.</span><br>A successful upload returns the HTTP Status Code <code>200 OK</code>.<br><p>See <a href=\"/api-docs/sell/static/inventory/managing-document-media.html\" target=\"_blank\">Managing documents</a> for additional information.</p> <span class=\"tablenote\"><b>Note:</b> You must use a <strong>Content-Type</strong> header with its value set to <b>multipart/form-data</b>.</p></span></p>This call does not have a JSON Request payload but uploads the file as form-data. For example:<br /> <pre>file: @&quot;/C:/Users/.../drone_user_warranty.pdf&quot;</pre>See <a href=\"/api-docs/commerce/media/resources/document/methods/uploadDocument#h2-samples\">Samples</a> for information.  # noqa: E501
@@ -242,18 +258,25 @@ class DocumentApi(object):
         :param async_req bool
         :param str document_id: The unique identifier of the document to be uploaded.<br><br>This value is returned in the response of the <a href=\"/api-docs/commerce/media/resources/document/methods/createDocument\" target=\"_blank\">createDocument</a> method. (required)
         :param str content_type: This header indicates the format of the request body provided by the client. Its value should be set to <b>multipart/form-data</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>. (required)
+        :param str files: The file. Has to written like this: {"file": "/path/to/file.pdf" }
         :return: DocumentResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        kwargs['_return_http_data_only'] = True
-        if kwargs.get('async_req'):
-            return self.upload_document_with_http_info(document_id, content_type, **kwargs)  # noqa: E501
+        kwargs["_return_http_data_only"] = True
+        if kwargs.get("async_req"):
+            return self.upload_document_with_http_info(
+                document_id, content_type, files, **kwargs
+            )  # noqa: E501
         else:
-            (data) = self.upload_document_with_http_info(document_id, content_type, **kwargs)  # noqa: E501
+            (data) = self.upload_document_with_http_info(
+                document_id, content_type, files, **kwargs
+            )  # noqa: E501
             return data
 
-    def upload_document_with_http_info(self, document_id, content_type, **kwargs):  # noqa: E501
+    def upload_document_with_http_info(
+        self, document_id, content_type, files, **kwargs
+    ):  # noqa: E501
         """upload_document  # noqa: E501
 
         This method associates the specified file with the specified document ID and uploads the input file. After the file has been uploaded, the processing of the file begins. Supported file types include .PDF, .JPEG/.JPG, and .PNG.<br><br><span class=\"tablenote\"><span style=\"color:#004680\"><strong>Note:</strong></span> The document ID value returned in the response of the <a href=\"/api-docs/commerce/media/resources/document/methods/createDocument\">createDocument</a> method is a required input path parameter for this method. This value is also returned in the <b>location</b> header of the <b>createDocument</b> response payload.</span><br>A successful upload returns the HTTP Status Code <code>200 OK</code>.<br><p>See <a href=\"/api-docs/sell/static/inventory/managing-document-media.html\" target=\"_blank\">Managing documents</a> for additional information.</p> <span class=\"tablenote\"><b>Note:</b> You must use a <strong>Content-Type</strong> header with its value set to <b>multipart/form-data</b>.</p></span></p>This call does not have a JSON Request payload but uploads the file as form-data. For example:<br /> <pre>file: @&quot;/C:/Users/.../drone_user_warranty.pdf&quot;</pre>See <a href=\"/api-docs/commerce/media/resources/document/methods/uploadDocument#h2-samples\">Samples</a> for information.  # noqa: E501
@@ -265,70 +288,84 @@ class DocumentApi(object):
         :param async_req bool
         :param str document_id: The unique identifier of the document to be uploaded.<br><br>This value is returned in the response of the <a href=\"/api-docs/commerce/media/resources/document/methods/createDocument\" target=\"_blank\">createDocument</a> method. (required)
         :param str content_type: This header indicates the format of the request body provided by the client. Its value should be set to <b>multipart/form-data</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>. (required)
+        :param str files: The file. Has to written like this: {"file": "/path/to/file.pdf" }
         :return: DocumentResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['document_id', 'content_type']  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
+        all_params = ["document_id", "content_type", "files"]  # noqa: E501
+        all_params.append("async_req")
+        all_params.append("_return_http_data_only")
+        all_params.append("_preload_content")
+        all_params.append("_request_timeout")
 
         params = locals()
-        for key, val in six.iteritems(params['kwargs']):
+        for key, val in six.iteritems(params["kwargs"]):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method upload_document" % key
                 )
             params[key] = val
-        del params['kwargs']
+        del params["kwargs"]
         # verify the required parameter 'document_id' is set
-        if ('document_id' not in params or
-                params['document_id'] is None):
-            raise ValueError("Missing the required parameter `document_id` when calling `upload_document`")  # noqa: E501
+        if "document_id" not in params or params["document_id"] is None:
+            raise ValueError(
+                "Missing the required parameter `document_id` when calling `upload_document`"
+            )  # noqa: E501
         # verify the required parameter 'content_type' is set
-        if ('content_type' not in params or
-                params['content_type'] is None):
-            raise ValueError("Missing the required parameter `content_type` when calling `upload_document`")  # noqa: E501
+        if "content_type" not in params or params["content_type"] is None:
+            raise ValueError(
+                "Missing the required parameter `content_type` when calling `upload_document`"
+            )  # noqa: E501
+
+        if "files" not in params or params["files"] is None:
+            raise ValueError(
+                "Missing the required parameter `files` when calling `upload_document`"
+            )  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'document_id' in params:
-            path_params['document_id'] = params['document_id']  # noqa: E501
+        if "document_id" in params:
+            path_params["document_id"] = params["document_id"]  # noqa: E501
 
         query_params = []
 
         header_params = {}
-        if 'content_type' in params:
-            header_params['Content-Type'] = params['content_type']  # noqa: E501
+        if "content_type" in params:
+            header_params["Content-Type"] = params["content_type"]  # noqa: E501
 
         form_params = []
+
         local_var_files = {}
+        if "files" in params:
+            local_var_files = files
 
         body_params = None
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_auth']  # noqa: E501
+        auth_settings = ["api_auth"]  # noqa: E501
 
         return self.api_client.call_api(
-            '/document/{document_id}/upload', 'POST',
+            "/document/{document_id}/upload",
+            "POST",
             path_params,
             query_params,
             header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='DocumentResponse',  # noqa: E501
+            response_type="DocumentResponse",  # noqa: E501
             auth_settings=auth_settings,
-            async_req=params.get('async_req'),
-            _return_http_data_only=params.get('_return_http_data_only'),
-            _preload_content=params.get('_preload_content', True),
-            _request_timeout=params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            async_req=params.get("async_req"),
+            _return_http_data_only=params.get("_return_http_data_only"),
+            _preload_content=params.get("_preload_content", True),
+            _request_timeout=params.get("_request_timeout"),
+            collection_formats=collection_formats,
+        )
