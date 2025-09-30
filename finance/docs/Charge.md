@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cancellation_id** | **str** | The unique identifier of an order cancellation. This field is only applicable and returned if the charge is related to an order cancellation. | [optional] 
+**cancellation_id** | **str** | The unique identifier of an order cancellation. This field is only applicable and returned if the charge is related to an order  cancellation. | [optional] 
 **case_id** | **str** | The unique identifier of a case filed against an order. This field is only applicable and returned if the charge is related to a case filed against an order. | [optional] 
 **charge_net_amount** | [**Amount**](Amount.md) |  | [optional] 
 **inquiry_id** | **str** | The unique identifier of an Item Not Received (INR) inquiry filed against an order. This field is only applicable and returned if the charge is related to has an INR inquiry filed against the order. | [optional] 

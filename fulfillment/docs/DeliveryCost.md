@@ -3,6 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**discount_amount** | [**Amount**](Amount.md) |  | [optional] 
+**handling_cost** | [**Amount**](Amount.md) |  | [optional] 
 **import_charges** | [**Amount**](Amount.md) |  | [optional] 
 **shipping_cost** | [**Amount**](Amount.md) |  | [optional] 
 **shipping_intermediation_fee** | [**Amount**](Amount.md) |  | [optional] 

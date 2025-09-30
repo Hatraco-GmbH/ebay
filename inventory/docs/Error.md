@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**category** | **str** | This string value indicates the error category. There are three categories of errors: request errors, application errors, and system errors. | [optional] 
+**category** | **str** | This string value indicates the error category. There are three categories of errors: request errors, application errors, and system errors.  | [optional] 
 **domain** | **str** | The name of the domain in which the error or warning occurred. | [optional] 
 **error_id** | **int** | A unique code that identifies the particular error or warning that occurred. Your application can use error codes as identifiers in your customized error-handling algorithms. | [optional] 
 **input_ref_ids** | **list[str]** | An array of one or more reference IDs which identify the specific request element(s) most closely associated to the error or warning, if any. | [optional] 

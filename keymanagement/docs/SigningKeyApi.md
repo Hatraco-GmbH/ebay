@@ -1,6 +1,6 @@
 # keymanagement.SigningKeyApi
 
-All URIs are relative to *https://apiz.ebay.com/developer/key_management/v1*
+All URIs are relative to *https://apiz.ebay.com{basePath}*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -8,9 +8,8 @@ Method | HTTP request | Description
 [**get_signing_key**](SigningKeyApi.md#get_signing_key) | **GET** /signing_key/{signing_key_id} | 
 [**get_signing_keys**](SigningKeyApi.md#get_signing_keys) | **GET** /signing_key | 
 
-
 # **create_signing_key**
-> SigningKey create_signing_key(body=body)
+> SigningKey create_signing_key(content_type, body=body)
 
 
 
@@ -24,16 +23,17 @@ import keymanagement
 from keymanagement.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: Client Credentials
+# Configure OAuth2 access token for authorization: api_auth
 configuration = keymanagement.Configuration()
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = keymanagement.SigningKeyApi(keymanagement.ApiClient(configuration))
+content_type = 'content_type_example' # str | This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.
 body = keymanagement.CreateSigningKeyRequest() # CreateSigningKeyRequest |  (optional)
 
 try:
-    api_response = api_instance.create_signing_key(body=body)
+    api_response = api_instance.create_signing_key(content_type, body=body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling SigningKeyApi->create_signing_key: %s\n" % e)
@@ -43,6 +43,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **content_type** | **str**| This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;application/json&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. | 
  **body** | [**CreateSigningKeyRequest**](CreateSigningKeyRequest.md)|  | [optional] 
 
 ### Return type
@@ -51,7 +52,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Client Credentials](../README.md#Client Credentials)
+[api_auth](../README.md#api_auth)
 
 ### HTTP request headers
 
@@ -75,7 +76,7 @@ import keymanagement
 from keymanagement.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: Client Credentials
+# Configure OAuth2 access token for authorization: api_auth
 configuration = keymanagement.Configuration()
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -102,7 +103,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Client Credentials](../README.md#Client Credentials)
+[api_auth](../README.md#api_auth)
 
 ### HTTP request headers
 
@@ -126,7 +127,7 @@ import keymanagement
 from keymanagement.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: Client Credentials
+# Configure OAuth2 access token for authorization: api_auth
 configuration = keymanagement.Configuration()
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -149,7 +150,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[Client Credentials](../README.md#Client Credentials)
+[api_auth](../README.md#api_auth)
 
 ### HTTP request headers
 

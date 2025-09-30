@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **delivery_cost** | [**Amount**](Amount.md) |  | [optional] 
 **delivery_discount** | [**Amount**](Amount.md) |  | [optional] 
 **fee** | [**Amount**](Amount.md) |  | [optional] 
-**price_discount_subtotal** | [**Amount**](Amount.md) |  | [optional] 
+**price_discount** | [**Amount**](Amount.md) |  | [optional] 
 **price_subtotal** | [**Amount**](Amount.md) |  | [optional] 
 **tax** | [**Amount**](Amount.md) |  | [optional] 
 **total** | [**Amount**](Amount.md) |  | [optional] 

@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**buyer_registration_address** | [**ExtendedContact**](ExtendedContact.md) |  | [optional] 
 **tax_address** | [**TaxAddress**](TaxAddress.md) |  | [optional] 
 **tax_identifier** | [**TaxIdentifier**](TaxIdentifier.md) |  | [optional] 
 **username** | **str** | The buyer&#x27;s eBay user ID. | [optional] 
