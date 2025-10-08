@@ -1,6 +1,9 @@
 # Transactions
 
+This is the base response type of the <b>getTransactions</b> method. The <b>getTransactions</b> response includes details on one or more monetary transactions that match the input criteria, as well as pagination data. 
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **href** | **str** | The URI of the &lt;b&gt;getTransactions&lt;/b&gt; method request that produced the current page of the result set. | [optional] 
@@ -9,7 +12,25 @@ Name | Type | Description | Notes
 **offset** | **int** | This integer value indicates the actual position that the first monetary transaction returned on the current page has in the results set. So, if you wanted to view the 11th monetary transaction of the result set, you would set the &lt;strong&gt;offset&lt;/strong&gt; value in the request to &lt;code&gt;10&lt;/code&gt;. &lt;br&gt;&lt;br&gt;In the request, you can use the &lt;b&gt;offset&lt;/b&gt; parameter in conjunction with the &lt;b&gt;limit&lt;/b&gt; parameter to control the pagination of the output. For example, if &lt;b&gt;offset&lt;/b&gt; is set to &lt;code&gt;30&lt;/code&gt; and &lt;b&gt;limit&lt;/b&gt; is set to &lt;code&gt;10&lt;/code&gt;, the method retrieves monetary transactions 31 thru 40 from the resulting collection of monetary transactions. &lt;br&gt;&lt;br&gt; &lt;span class&#x3D;\&quot;tablenote\&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; This feature employs a zero-based list, where the first item in the list has an offset of &lt;code&gt;0&lt;/code&gt;.&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;Default:&lt;/b&gt; &lt;code&gt;0&lt;/code&gt; (zero) | [optional] 
 **prev** | **str** | The &lt;b&gt;getTransactions&lt;/b&gt; method URI to use if you wish to view the previous page of the result set. &lt;br&gt;&lt;br&gt;This field is only returned if there is a previous page of results to view based on the current input criteria. | [optional] 
 **total** | **int** | This integer value is the total amount of monetary transactions in the result set based on the current input criteria. Based on the total number of monetary transactions that match the criteria, and on the &lt;strong&gt;limit&lt;/strong&gt; and &lt;strong&gt;offset&lt;/strong&gt; values, there may be additional pages in the results set. | [optional] 
-**transactions** | [**list[Transaction]**](Transaction.md) | An array of one or more monetary transactions that match the input criteria. Details for each monetary transaction may include the unique identifier of the order associated with the monetary transaction, the status of the transaction, the amount of the order, the order&#x27;s buyer, and the unique identifier of the payout (if a payout has been initiated/issued for the order). | [optional] 
+**transactions** | [**List[Transaction]**](Transaction.md) | An array of one or more monetary transactions that match the input criteria. Details for each monetary transaction may include the unique identifier of the order associated with the monetary transaction, the status of the transaction, the amount of the order, the order&#39;s buyer, and the unique identifier of the payout (if a payout has been initiated/issued for the order). | [optional] 
 
+## Example
+
+```python
+from ebayfinance.models.transactions import Transactions
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of Transactions from a JSON string
+transactions_instance = Transactions.from_json(json)
+# print the JSON string representation of the object
+print(Transactions.to_json())
+
+# convert the object into a dict
+transactions_dict = transactions_instance.to_dict()
+# create an instance of Transactions from a dict
+transactions_from_dict = Transactions.from_dict(transactions_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
 
