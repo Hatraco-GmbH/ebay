@@ -1,6 +1,6 @@
 # ebaytaxonomy.CategoryTreeApi
 
-All URIs are relative to *https://api.ebay.com{basePath}*
+All URIs are relative to *https://api.ebay.com/commerce/taxonomy/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -14,38 +14,56 @@ Method | HTTP request | Description
 [**get_expired_categories**](CategoryTreeApi.md#get_expired_categories) | **GET** /category_tree/{category_tree_id}/get_expired_categories | 
 [**get_item_aspects_for_category**](CategoryTreeApi.md#get_item_aspects_for_category) | **GET** /category_tree/{category_tree_id}/get_item_aspects_for_category | 
 
+
 # **fetch_item_aspects**
 > GetCategoriesAspectResponse fetch_item_aspects(category_tree_id)
 
 Get Aspects for All Leaf Categories in a Marketplace
 
-This method returns a complete list of aspects for all of the leaf categories that belong to an eBay marketplace. The eBay marketplace is specified through the <b>category_tree_id</b> URI parameter.<br><br><span class=\"tablenote\"> <strong>Note:</strong> A successful call returns a payload as a gzipped JSON file sent as a binary file using the content-type:application/octet-stream in the response. This file may be large (over 100 MB, compressed). Extract the JSON file from the compressed file with a utility that handles .gz or .gzip. The open source <a href=\"https://github.com/eBay/taxonomy-sdk \" target=\"_blank\">Taxonomy SDK</a> can be used to compare the aspect metadata that is returned in this response. The <b>Taxonomy SDK</b> uses this call to surface changes (new, modified, and removed entities) between an updated version of a bulk downloaded file relative to a previous version.</span>
+This method returns a complete list of aspects for all of the leaf categories that belong to an eBay marketplace. The eBay marketplace is specified through the <b>category_tree_id</b> URI parameter.<br><br><span class="tablenote"> <strong>Note:</strong> A successful call returns a payload as a gzipped JSON file sent as a binary file using the content-type:application/octet-stream in the response. This file may be large (over 100 MB, compressed). Extract the JSON file from the compressed file with a utility that handles .gz or .gzip. The open source <a href="https://github.com/eBay/taxonomy-sdk " target="_blank">Taxonomy SDK</a> can be used to compare the aspect metadata that is returned in this response. The <b>Taxonomy SDK</b> uses this call to surface changes (new, modified, and removed entities) between an updated version of a bulk downloaded file relative to a previous version.</span>
 
 ### Example
+
+* OAuth Authentication (api_auth):
+
 ```python
-from __future__ import print_function
-import time
 import ebaytaxonomy
+from ebaytaxonomy.models.get_categories_aspect_response import GetCategoriesAspectResponse
 from ebaytaxonomy.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: api_auth
-configuration = ebaytaxonomy.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.ebay.com/commerce/taxonomy/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ebaytaxonomy.Configuration(
+    host = "https://api.ebay.com/commerce/taxonomy/v1"
+)
 
-# create an instance of the API class
-api_instance = ebaytaxonomy.CategoryTreeApi(ebaytaxonomy.ApiClient(configuration))
-category_tree_id = 'category_tree_id_example' # str | The unique identifier of the eBay category tree. The category tree ID for an eBay marketplace can be retrieved using the <b>getDefaultCategoryTreeId</b> method.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Aspects for All Leaf Categories in a Marketplace
-    api_response = api_instance.fetch_item_aspects(category_tree_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CategoryTreeApi->fetch_item_aspects: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with ebaytaxonomy.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ebaytaxonomy.CategoryTreeApi(api_client)
+    category_tree_id = 'category_tree_id_example' # str | The unique identifier of the eBay category tree. The category tree ID for an eBay marketplace can be retrieved using the <b>getDefaultCategoryTreeId</b> method.
+
+    try:
+        # Get Aspects for All Leaf Categories in a Marketplace
+        api_response = api_instance.fetch_item_aspects(category_tree_id)
+        print("The response of CategoryTreeApi->fetch_item_aspects:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CategoryTreeApi->fetch_item_aspects: %s\n" % e)
 ```
 
+
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -64,6 +82,15 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**404** | Not found |  -  |
+**500** | Internal Server Error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_category_subtree**
@@ -71,35 +98,52 @@ Name | Type | Description  | Notes
 
 Get a Category Subtree
 
-This call retrieves the details of all nodes of the category tree hierarchy (the subtree) below a specified category of a category tree. You identify the tree using the <b>category_tree_id</b> parameter, which was returned by the <b>getDefaultCategoryTreeId</b> call in the <b>categoryTreeId</b> field.<br><br><span class=\"tablenote\"> <strong>Note:</strong> This method can return a very large payload, so gzip compression is supported. To enable gzip compression, include the <code>Accept-Encoding</code> header and set its value to <code>gzip</code> as shown below: <br><br><code>&nbsp;&nbsp;Accept-Encoding: gzip</code></span>
+This call retrieves the details of all nodes of the category tree hierarchy (the subtree) below a specified category of a category tree. You identify the tree using the <b>category_tree_id</b> parameter, which was returned by the <b>getDefaultCategoryTreeId</b> call in the <b>categoryTreeId</b> field.<br><br><span class="tablenote"> <strong>Note:</strong> This method can return a very large payload, so gzip compression is supported. To enable gzip compression, include the <code>Accept-Encoding</code> header and set its value to <code>gzip</code> as shown below: <br><br><code>&nbsp;&nbsp;Accept-Encoding: gzip</code></span>
 
 ### Example
+
+* OAuth Authentication (api_auth):
+
 ```python
-from __future__ import print_function
-import time
 import ebaytaxonomy
+from ebaytaxonomy.models.category_subtree import CategorySubtree
 from ebaytaxonomy.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: api_auth
-configuration = ebaytaxonomy.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.ebay.com/commerce/taxonomy/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ebaytaxonomy.Configuration(
+    host = "https://api.ebay.com/commerce/taxonomy/v1"
+)
 
-# create an instance of the API class
-api_instance = ebaytaxonomy.CategoryTreeApi(ebaytaxonomy.ApiClient(configuration))
-category_id = 'category_id_example' # str | The unique identifier of the category at the top of the subtree being requested. Metadata on this category and all its descendant categories are retrieved.<br><br><span class=\"tablenote\"><strong>Note:</strong> If the <b>category_id</b> submitted identifies a leaf node of the tree, the call response will contain information about only that leaf node, which is a valid subtree.<!-- <br><br> This call also returns an error if <b>category_id</b> identifies a deprecated category. This can occur if you routinely cache your category trees. Use the <b>Get Deprecated Categories and Mapping</b> call to determine which current category should be used in place of the deprecated category, and use the <b>getCategoryTree</b> call to update your cached copy of the tree. --> </span>
-category_tree_id = 'category_tree_id_example' # str | The unique identifier of the eBay category tree. The category tree ID for an eBay marketplace can be retrieved using the <b>getDefaultCategoryTreeId</b> method.
-accept_encoding = 'accept_encoding_example' # str | This header indicates the compression-encoding algorithms the client accepts for the response. This value should be set to <code>gzip</code>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>. (optional)
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get a Category Subtree
-    api_response = api_instance.get_category_subtree(category_id, category_tree_id, accept_encoding=accept_encoding)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CategoryTreeApi->get_category_subtree: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with ebaytaxonomy.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ebaytaxonomy.CategoryTreeApi(api_client)
+    category_id = 'category_id_example' # str | The unique identifier of the category at the top of the subtree being requested. Metadata on this category and all its descendant categories are retrieved.<br><br><span class=\"tablenote\"><strong>Note:</strong> If the <b>category_id</b> submitted identifies a leaf node of the tree, the call response will contain information about only that leaf node, which is a valid subtree.<!-- <br><br> This call also returns an error if <b>category_id</b> identifies a deprecated category. This can occur if you routinely cache your category trees. Use the <b>Get Deprecated Categories and Mapping</b> call to determine which current category should be used in place of the deprecated category, and use the <b>getCategoryTree</b> call to update your cached copy of the tree. --> </span>
+    category_tree_id = 'category_tree_id_example' # str | The unique identifier of the eBay category tree. The category tree ID for an eBay marketplace can be retrieved using the <b>getDefaultCategoryTreeId</b> method.
+    accept_encoding = 'accept_encoding_example' # str | This header indicates the compression-encoding algorithms the client accepts for the response. This value should be set to <code>gzip</code>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>. (optional)
+
+    try:
+        # Get a Category Subtree
+        api_response = api_instance.get_category_subtree(category_id, category_tree_id, accept_encoding=accept_encoding)
+        print("The response of CategoryTreeApi->get_category_subtree:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CategoryTreeApi->get_category_subtree: %s\n" % e)
 ```
 
+
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -120,6 +164,15 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_category_suggestions**
@@ -127,34 +180,51 @@ Name | Type | Description  | Notes
 
 Get Suggested Categories
 
-This call returns an array of category tree leaf nodes in the specified category tree that are considered by eBay to most closely correspond to the query string <b>q</b>. Returned with each suggested node is a localized name for that category (based on the <b>Accept-Language</b> header specified for the call), and details about each of the category's ancestor nodes, extending from its immediate parent up to the root of the category tree.<br><br>You identify the tree using the <b>category_tree_id</b> parameter, which was returned by the <b>getDefaultCategoryTreeId</b> call in the <b>categoryTreeId</b> field.<br><br><span class=\"tablenote\"> <strong><span style=\"color:red\">Important:</span></strong> This call is not supported in the Sandbox environment. It will return a response payload in which the <b>categoryName</b> fields contain random or boilerplate text regardless of the query submitted.</span>
+This call returns an array of category tree leaf nodes in the specified category tree that are considered by eBay to most closely correspond to the query string <b>q</b>. Returned with each suggested node is a localized name for that category (based on the <b>Accept-Language</b> header specified for the call), and details about each of the category's ancestor nodes, extending from its immediate parent up to the root of the category tree.<br><br>You identify the tree using the <b>category_tree_id</b> parameter, which was returned by the <b>getDefaultCategoryTreeId</b> call in the <b>categoryTreeId</b> field.<br><br><span class="tablenote"> <strong><span style="color:red">Important:</span></strong> This call is not supported in the Sandbox environment. It will return a response payload in which the <b>categoryName</b> fields contain random or boilerplate text regardless of the query submitted.</span>
 
 ### Example
+
+* OAuth Authentication (api_auth):
+
 ```python
-from __future__ import print_function
-import time
 import ebaytaxonomy
+from ebaytaxonomy.models.category_suggestion_response import CategorySuggestionResponse
 from ebaytaxonomy.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: api_auth
-configuration = ebaytaxonomy.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.ebay.com/commerce/taxonomy/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ebaytaxonomy.Configuration(
+    host = "https://api.ebay.com/commerce/taxonomy/v1"
+)
 
-# create an instance of the API class
-api_instance = ebaytaxonomy.CategoryTreeApi(ebaytaxonomy.ApiClient(configuration))
-category_tree_id = 'category_tree_id_example' # str | The unique identifier of the eBay category tree. The category tree ID for an eBay marketplace can be retrieved using the <b>getDefaultCategoryTreeId</b> method.
-q = 'q_example' # str | A quoted string that describes or characterizes the item being offered for sale. The string format is free form, and can contain any combination of phrases or keywords. eBay will parse the string and return suggested categories for the item.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Suggested Categories
-    api_response = api_instance.get_category_suggestions(category_tree_id, q)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CategoryTreeApi->get_category_suggestions: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with ebaytaxonomy.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ebaytaxonomy.CategoryTreeApi(api_client)
+    category_tree_id = 'category_tree_id_example' # str | The unique identifier of the eBay category tree. The category tree ID for an eBay marketplace can be retrieved using the <b>getDefaultCategoryTreeId</b> method.
+    q = 'q_example' # str | A quoted string that describes or characterizes the item being offered for sale. The string format is free form, and can contain any combination of phrases or keywords. eBay will parse the string and return suggested categories for the item.
+
+    try:
+        # Get Suggested Categories
+        api_response = api_instance.get_category_suggestions(category_tree_id, q)
+        print("The response of CategoryTreeApi->get_category_suggestions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CategoryTreeApi->get_category_suggestions: %s\n" % e)
 ```
 
+
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -174,6 +244,16 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**204** | No content |  -  |
+**400** | Bad Request |  -  |
+**404** | Not found |  -  |
+**500** | Internal Server Error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_category_tree**
@@ -181,34 +261,51 @@ Name | Type | Description  | Notes
 
 Get a Category Tree
 
-This method retrieves the complete category tree that is identified by the <b>category_tree_id</b> parameter. The value of <b>category_tree_id</b> was returned by the <b>getDefaultCategoryTreeId</b> method in the <b>categoryTreeId</b> field. The response contains details of all nodes of the specified eBay category tree, as well as the eBay marketplaces that use this category tree.<br><br><span class=\"tablenote\"> <strong>Note:</strong> This method can return a very large payload, so gzip compression is supported. To enable gzip compression, include the <code>Accept-Encoding</code> header and set its value to <code>gzip</code> as shown below: <br><br><code>&nbsp;&nbsp;Accept-Encoding: gzip</code></span>
+This method retrieves the complete category tree that is identified by the <b>category_tree_id</b> parameter. The value of <b>category_tree_id</b> was returned by the <b>getDefaultCategoryTreeId</b> method in the <b>categoryTreeId</b> field. The response contains details of all nodes of the specified eBay category tree, as well as the eBay marketplaces that use this category tree.<br><br><span class="tablenote"> <strong>Note:</strong> This method can return a very large payload, so gzip compression is supported. To enable gzip compression, include the <code>Accept-Encoding</code> header and set its value to <code>gzip</code> as shown below: <br><br><code>&nbsp;&nbsp;Accept-Encoding: gzip</code></span>
 
 ### Example
+
+* OAuth Authentication (api_auth):
+
 ```python
-from __future__ import print_function
-import time
 import ebaytaxonomy
+from ebaytaxonomy.models.category_tree import CategoryTree
 from ebaytaxonomy.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: api_auth
-configuration = ebaytaxonomy.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.ebay.com/commerce/taxonomy/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ebaytaxonomy.Configuration(
+    host = "https://api.ebay.com/commerce/taxonomy/v1"
+)
 
-# create an instance of the API class
-api_instance = ebaytaxonomy.CategoryTreeApi(ebaytaxonomy.ApiClient(configuration))
-category_tree_id = 'category_tree_id_example' # str | The unique identifier of the eBay category tree. The category tree ID for an eBay marketplace can be retrieved using the <b>getDefaultCategoryTreeId</b> method.
-accept_encoding = 'accept_encoding_example' # str | This header indicates the compression-encoding algorithms the client accepts for the response. This value should be set to <code>gzip</code>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>. (optional)
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get a Category Tree
-    api_response = api_instance.get_category_tree(category_tree_id, accept_encoding=accept_encoding)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CategoryTreeApi->get_category_tree: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with ebaytaxonomy.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ebaytaxonomy.CategoryTreeApi(api_client)
+    category_tree_id = 'category_tree_id_example' # str | The unique identifier of the eBay category tree. The category tree ID for an eBay marketplace can be retrieved using the <b>getDefaultCategoryTreeId</b> method.
+    accept_encoding = 'accept_encoding_example' # str | This header indicates the compression-encoding algorithms the client accepts for the response. This value should be set to <code>gzip</code>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>. (optional)
+
+    try:
+        # Get a Category Tree
+        api_response = api_instance.get_category_tree(category_tree_id, accept_encoding=accept_encoding)
+        print("The response of CategoryTreeApi->get_category_tree:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CategoryTreeApi->get_category_tree: %s\n" % e)
 ```
 
+
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -228,6 +325,15 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_compatibility_properties**
@@ -238,31 +344,48 @@ Get Compatibility Properties
 This call retrieves the compatible vehicle aspects that are used to define a motor vehicle that is compatible with a motor vehicle part or accessory. The values that are retrieved here might include motor vehicle aspects such as 'Make', 'Model', 'Year', 'Engine', and 'Trim', and each of these aspects are localized for the eBay marketplace.<br><br> The <strong>category_tree_id</strong> value is passed in as a path parameter, and this value identifies the eBay category tree. The <strong>category_id</strong> value is passed in as a query parameter, as this parameter is also required. The specified category must be a category that supports parts compatibility.<br><br> At this time, this operation only supports parts and accessories listings for cars, trucks, and motorcycles (not boats, power sports, or any other vehicle types). Only the following eBay marketplaces support parts compatibility:<ul><li>eBay US (Motors and non-Motors categories)</li><li>eBay Canada (Motors and non-Motors categories)</li><li>eBay UK</li><li>eBay Germany</li><li>eBay Australia</li><li>eBay France</li><li>eBay Italy</li><li>eBay Spain</li></ul>
 
 ### Example
+
+* OAuth Authentication (api_auth):
+
 ```python
-from __future__ import print_function
-import time
 import ebaytaxonomy
+from ebaytaxonomy.models.get_compatibility_metadata_response import GetCompatibilityMetadataResponse
 from ebaytaxonomy.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: api_auth
-configuration = ebaytaxonomy.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.ebay.com/commerce/taxonomy/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ebaytaxonomy.Configuration(
+    host = "https://api.ebay.com/commerce/taxonomy/v1"
+)
 
-# create an instance of the API class
-api_instance = ebaytaxonomy.CategoryTreeApi(ebaytaxonomy.ApiClient(configuration))
-category_tree_id = 'category_tree_id_example' # str | This is the unique identifier of category tree. The following is the list of <strong>category_tree_id</strong> values and the eBay marketplaces that they represent. One of these ID values must be passed in as a path parameter, and the <strong>category_id</strong> value, that is passed in as query parameter, must be a valid eBay category on that eBay marketplace that supports parts compatibility for cars, trucks, or motorcycles.<br><br><ul><li>eBay US: 0</li><li>eBay Motors US: 100</li><li>eBay Canada: 2</li><li>eBay UK: 3</li><li>eBay Germany: 77</li><li>eBay Australia: 15</li><li>eBay France: 71</li><li>eBay Italy: 101</li><li>eBay Spain: 186</li></ul>
-category_id = 'category_id_example' # str | The unique identifier of an eBay category. This eBay category must be a valid eBay category on the specified eBay marketplace, and the category must support parts compatibility for cars, trucks, or motorcycles.<br><br> The <b>getAutomotivePartsCompatibilityPolicies</b> method of the Selling Metadata API can be used to retrieve all eBay categories for an eBay marketplace that support parts compatibility for vehicles.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Compatibility Properties
-    api_response = api_instance.get_compatibility_properties(category_tree_id, category_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CategoryTreeApi->get_compatibility_properties: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with ebaytaxonomy.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ebaytaxonomy.CategoryTreeApi(api_client)
+    category_tree_id = 'category_tree_id_example' # str | This is the unique identifier of category tree. The following is the list of <strong>category_tree_id</strong> values and the eBay marketplaces that they represent. One of these ID values must be passed in as a path parameter, and the <strong>category_id</strong> value, that is passed in as query parameter, must be a valid eBay category on that eBay marketplace that supports parts compatibility for cars, trucks, or motorcycles.<br><br><ul><li>eBay US: 0</li><li>eBay Motors US: 100</li><li>eBay Canada: 2</li><li>eBay UK: 3</li><li>eBay Germany: 77</li><li>eBay Australia: 15</li><li>eBay France: 71</li><li>eBay Italy: 101</li><li>eBay Spain: 186</li></ul>
+    category_id = 'category_id_example' # str | The unique identifier of an eBay category. This eBay category must be a valid eBay category on the specified eBay marketplace, and the category must support parts compatibility for cars, trucks, or motorcycles.<br><br> The <b>getAutomotivePartsCompatibilityPolicies</b> method of the Selling Metadata API can be used to retrieve all eBay categories for an eBay marketplace that support parts compatibility for vehicles.
+
+    try:
+        # Get Compatibility Properties
+        api_response = api_instance.get_compatibility_properties(category_tree_id, category_id)
+        print("The response of CategoryTreeApi->get_compatibility_properties:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CategoryTreeApi->get_compatibility_properties: %s\n" % e)
 ```
 
+
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -282,6 +405,16 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**204** | No content |  -  |
+**400** | Bad Request |  -  |
+**404** | Not found |  -  |
+**500** | Internal Server Error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_compatibility_property_values**
@@ -292,33 +425,50 @@ Get Compatibility Property Values
 This call retrieves applicable compatible vehicle property values based on the specified eBay marketplace, specified eBay category, and filters used in the request. Compatible vehicle properties are returned in the <strong>compatibilityProperties.name</strong> field of a <strong>getCompatibilityProperties</strong> response. <br><br> One compatible vehicle property applicable to the specified eBay marketplace and eBay category is specified through the required <strong>compatibility_property</strong> filter. Then, the user has the option of further restricting the compatible vehicle property values that are returned in the response by specifying one or more compatible vehicle property name/value pairs through the <strong>filter</strong> query parameter.<br><br>See the documentation in <strong>URI parameters</strong> section for more information on using the <strong>compatibility_property</strong> and <strong>filter</strong> query parameters together to customize the data that is retrieved.
 
 ### Example
+
+* OAuth Authentication (api_auth):
+
 ```python
-from __future__ import print_function
-import time
 import ebaytaxonomy
+from ebaytaxonomy.models.get_compatibility_property_values_response import GetCompatibilityPropertyValuesResponse
 from ebaytaxonomy.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: api_auth
-configuration = ebaytaxonomy.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.ebay.com/commerce/taxonomy/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ebaytaxonomy.Configuration(
+    host = "https://api.ebay.com/commerce/taxonomy/v1"
+)
 
-# create an instance of the API class
-api_instance = ebaytaxonomy.CategoryTreeApi(ebaytaxonomy.ApiClient(configuration))
-category_tree_id = 'category_tree_id_example' # str | This is the unique identifier of the category tree. The following is the list of <strong>category_tree_id</strong> values and the eBay marketplaces that they represent. One of these ID values must be passed in as a path parameter, and the <strong>category_id</strong> value, that is passed in as query parameter, must be a valid eBay category on that eBay marketplace that supports parts compatibility for cars, trucks, or motorcycles.<br><br><ul><li>eBay US: 0</li><li>eBay Motors US: 100</li><li>eBay Canada: 2</li><li>eBay UK: 3</li><li>eBay Germany: 77</li><li>eBay Australia: 15</li><li>eBay France: 71</li><li>eBay Italy: 101</li><li>eBay Spain: 186</li></ul>
-compatibility_property = 'compatibility_property_example' # str | One compatible vehicle property applicable to the specified eBay marketplace and eBay category is specified in this required filter. Compatible vehicle properties are returned in the <strong>compatibilityProperties.name</strong> field of a <strong>getCompatibilityProperties</strong> response. <br><br> For example, if you wanted to retrieve all vehicle trims for a 2018 Toyota Camry, you would set this filter as follows: <code>compatibility_property=Trim</code> and then include the following three name/value filters through one <strong>filter</strong> parameter: <code>filter=Year:2018,Make:Toyota,Model:Camry</code>.<br><br>So, putting this all together, the URI would look something like this:<br><br><pre><code>GET https://api.ebay.com/commerce/<br>taxonomy/v1/category_tree/100/<br>get_compatibility_property_values?<br><strong>category_id</strong>=6016&<strong>compatibility_property</strong>=Trim<br>&<strong>filter</strong>=Year:2018,Make:Toyota,Model:Camry</code></pre>
-category_id = 'category_id_example' # str | The unique identifier of an eBay category. This eBay category must be a valid eBay category on the specified eBay marketplace, and the category must support parts compatibility for cars, trucks, or motorcycles.<br><br> The <strong>getAutomotivePartsCompatibilityPolicies</strong> method of the Selling Metadata API can be used to retrieve all eBay categories for an eBay marketplace that support parts compatibility for vehicles.
-filter = 'filter_example' # str | One or more compatible vehicle property name/value pairs are passed in through this query parameter. The compatible vehicle property name and corresponding value are delimited with a colon (:), such as <code>filter=Year:2018</code>, and multiple compatible vehicle property name/value pairs are delimited with a comma (,).<br><br><span class=\"tablenote\"><b>Note:</b> Commas are used as delimiters between filter values. If a value includes a comma (e.g., <code>BodyStyle:AWD B9 8W5<b>,</b>C8WD</code>) you <b>must</b> include a backslash (<b>\\</b>) immediately before the comma to prevent it from being evaluated as a delimiter.<br><br>As with all query parameter values, the filter parameters must be URL encoded. For more information about encoding request parameters, refer to <a href=\"/api-docs/static/rest-request-components.html#parameters\" target=\"_blank\">URL encoding query parameter values</a>.</span><br>For example, to retrieve all vehicle trims for a 2022 Audi A4:<ul><li>Set the <strong>compatibility_property</strong> filter to <code>compatibility_property=Trim</code></li><li>Include the following name/value filters using one <strong>filter</strong> parameter:<ul><li><code>Year:2022</code></li><li><code>Make:Audi</code></li><li><code>Model:A4</code></li><li><code>BodyStyle:AWD B9 8W5\\,8WD</code></li></ul></li></ul>The resulting comma-separated filter query parameter is:<pre><code>filter=Year:2022,Make:Audi,Model:A4,BodyStyle:AWD B9 8W5\\,8WD</code></pre><br>The following sample shows the same filter but with URL encoding for the blank spaces.<br><pre><code>GET https://api.ebay.com/commerce/<br>taxonomy/v1/category_tree/100/<br>get_compatibility_property_values?<b>category_id</b>=6016&<b>compatibility_property</b>=Trim&<b>filter</b>=Year:2022,Make:Audi,Model:A4,BodyStyle:AWD%20B9%208W5%5C%2C8WD</code></pre><br><span class=\"tablenote\"><b>Note:</b> While not required, it is strongly recommended that users limit the size of the result set by using the <b>filter</b> query parameter. Failure to do so may result in a timeout error if too much data is attempted to be returned.</span> For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/commerce/taxonomy/types/txn:ConstraintFilter (optional)
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Compatibility Property Values
-    api_response = api_instance.get_compatibility_property_values(category_tree_id, compatibility_property, category_id, filter=filter)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CategoryTreeApi->get_compatibility_property_values: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with ebaytaxonomy.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ebaytaxonomy.CategoryTreeApi(api_client)
+    category_tree_id = 'category_tree_id_example' # str | This is the unique identifier of the category tree. The following is the list of <strong>category_tree_id</strong> values and the eBay marketplaces that they represent. One of these ID values must be passed in as a path parameter, and the <strong>category_id</strong> value, that is passed in as query parameter, must be a valid eBay category on that eBay marketplace that supports parts compatibility for cars, trucks, or motorcycles.<br><br><ul><li>eBay US: 0</li><li>eBay Motors US: 100</li><li>eBay Canada: 2</li><li>eBay UK: 3</li><li>eBay Germany: 77</li><li>eBay Australia: 15</li><li>eBay France: 71</li><li>eBay Italy: 101</li><li>eBay Spain: 186</li></ul>
+    compatibility_property = 'compatibility_property_example' # str | One compatible vehicle property applicable to the specified eBay marketplace and eBay category is specified in this required filter. Compatible vehicle properties are returned in the <strong>compatibilityProperties.name</strong> field of a <strong>getCompatibilityProperties</strong> response. <br><br> For example, if you wanted to retrieve all vehicle trims for a 2018 Toyota Camry, you would set this filter as follows: <code>compatibility_property=Trim</code> and then include the following three name/value filters through one <strong>filter</strong> parameter: <code>filter=Year:2018,Make:Toyota,Model:Camry</code>.<br><br>So, putting this all together, the URI would look something like this:<br><br><pre><code>GET https://api.ebay.com/commerce/<br>taxonomy/v1/category_tree/100/<br>get_compatibility_property_values?<br><strong>category_id</strong>=6016&<strong>compatibility_property</strong>=Trim<br>&<strong>filter</strong>=Year:2018,Make:Toyota,Model:Camry</code></pre>
+    category_id = 'category_id_example' # str | The unique identifier of an eBay category. This eBay category must be a valid eBay category on the specified eBay marketplace, and the category must support parts compatibility for cars, trucks, or motorcycles.<br><br> The <strong>getAutomotivePartsCompatibilityPolicies</strong> method of the Selling Metadata API can be used to retrieve all eBay categories for an eBay marketplace that support parts compatibility for vehicles.
+    filter = 'filter_example' # str | One or more compatible vehicle property name/value pairs are passed in through this query parameter. The compatible vehicle property name and corresponding value are delimited with a colon (:), such as <code>filter=Year:2018</code>, and multiple compatible vehicle property name/value pairs are delimited with a comma (,).<br><br><span class=\"tablenote\"><b>Note:</b> Commas are used as delimiters between filter values. If a value includes a comma (e.g., <code>BodyStyle:AWD B9 8W5<b>,</b>C8WD</code>) you <b>must</b> include a backslash (<b>\\</b>) immediately before the comma to prevent it from being evaluated as a delimiter.<br><br>As with all query parameter values, the filter parameters must be URL encoded. For more information about encoding request parameters, refer to <a href=\"/api-docs/static/rest-request-components.html#parameters\" target=\"_blank\">URL encoding query parameter values</a>.</span><br>For example, to retrieve all vehicle trims for a 2022 Audi A4:<ul><li>Set the <strong>compatibility_property</strong> filter to <code>compatibility_property=Trim</code></li><li>Include the following name/value filters using one <strong>filter</strong> parameter:<ul><li><code>Year:2022</code></li><li><code>Make:Audi</code></li><li><code>Model:A4</code></li><li><code>BodyStyle:AWD B9 8W5\\,8WD</code></li></ul></li></ul>The resulting comma-separated filter query parameter is:<pre><code>filter=Year:2022,Make:Audi,Model:A4,BodyStyle:AWD B9 8W5\\,8WD</code></pre><br>The following sample shows the same filter but with URL encoding for the blank spaces.<br><pre><code>GET https://api.ebay.com/commerce/<br>taxonomy/v1/category_tree/100/<br>get_compatibility_property_values?<b>category_id</b>=6016&<b>compatibility_property</b>=Trim&<b>filter</b>=Year:2022,Make:Audi,Model:A4,BodyStyle:AWD%20B9%208W5%5C%2C8WD</code></pre><br><span class=\"tablenote\"><b>Note:</b> While not required, it is strongly recommended that users limit the size of the result set by using the <b>filter</b> query parameter. Failure to do so may result in a timeout error if too much data is attempted to be returned.</span> For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/commerce/taxonomy/types/txn:ConstraintFilter (optional)
+
+    try:
+        # Get Compatibility Property Values
+        api_response = api_instance.get_compatibility_property_values(category_tree_id, compatibility_property, category_id, filter=filter)
+        print("The response of CategoryTreeApi->get_compatibility_property_values:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CategoryTreeApi->get_compatibility_property_values: %s\n" % e)
 ```
 
+
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -340,6 +490,16 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**204** | No content |  -  |
+**400** | Bad Request |  -  |
+**404** | Not found |  -  |
+**500** | Internal Server Error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_default_category_tree_id**
@@ -350,30 +510,47 @@ Get a Default Category Tree ID
 A given eBay marketplace might use multiple category trees, but one of those trees is considered to be the default for that marketplace. This call retrieves a reference to the default category tree associated with the specified eBay marketplace ID. The response includes only the tree's unique identifier and version, which you can use to retrieve more details about the tree, its structure, and its individual category nodes.
 
 ### Example
+
+* OAuth Authentication (api_auth):
+
 ```python
-from __future__ import print_function
-import time
 import ebaytaxonomy
+from ebaytaxonomy.models.base_category_tree import BaseCategoryTree
 from ebaytaxonomy.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: api_auth
-configuration = ebaytaxonomy.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.ebay.com/commerce/taxonomy/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ebaytaxonomy.Configuration(
+    host = "https://api.ebay.com/commerce/taxonomy/v1"
+)
 
-# create an instance of the API class
-api_instance = ebaytaxonomy.CategoryTreeApi(ebaytaxonomy.ApiClient(configuration))
-marketplace_id = 'marketplace_id_example' # str | The unique identifier of the eBay marketplace for which the category tree ID is requested. For a list of supported marketplace IDs, see <a href=\"/api-docs/commerce/taxonomy/static/supportedmarketplaces.html\">Marketplaces with Default Category Trees</a>.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get a Default Category Tree ID
-    api_response = api_instance.get_default_category_tree_id(marketplace_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CategoryTreeApi->get_default_category_tree_id: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with ebaytaxonomy.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ebaytaxonomy.CategoryTreeApi(api_client)
+    marketplace_id = 'marketplace_id_example' # str | The unique identifier of the eBay marketplace for which the category tree ID is requested. For a list of supported marketplace IDs, see <a href=\"/api-docs/commerce/taxonomy/static/supportedmarketplaces.html\">Marketplaces with Default Category Trees</a>.
+
+    try:
+        # Get a Default Category Tree ID
+        api_response = api_instance.get_default_category_tree_id(marketplace_id)
+        print("The response of CategoryTreeApi->get_default_category_tree_id:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CategoryTreeApi->get_default_category_tree_id: %s\n" % e)
 ```
 
+
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -392,39 +569,63 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**204** | No content |  -  |
+**400** | Bad Request |  -  |
+**500** | Internal Server Error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_expired_categories**
 > ExpiredCategories get_expired_categories(category_tree_id)
 
-
-
-This method retrieves the mappings of expired leaf categories in the specified category tree to their corresponding active leaf categories. Note that in some cases, several expired categories are mapped to a single active category.<br><br><span class=\"tablenote\"><b>Note:</b> This method only returns information about categories that have been mapped (i.e., combined categories and split categories). It does not return information about expired categories that have no corresponding active categories. When a category expires in this manner, any completed items that were listed in the expired category can still be found, but new listings cannot be created in the category.</span>
+This method retrieves the mappings of expired leaf categories in the specified category tree to their corresponding active leaf categories. Note that in some cases, several expired categories are mapped to a single active category.<br><br><span class="tablenote"><b>Note:</b> This method only returns information about categories that have been mapped (i.e., combined categories and split categories). It does not return information about expired categories that have no corresponding active categories. When a category expires in this manner, any completed items that were listed in the expired category can still be found, but new listings cannot be created in the category.</span>
 
 ### Example
+
+* OAuth Authentication (api_auth):
+
 ```python
-from __future__ import print_function
-import time
 import ebaytaxonomy
+from ebaytaxonomy.models.expired_categories import ExpiredCategories
 from ebaytaxonomy.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: api_auth
-configuration = ebaytaxonomy.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.ebay.com/commerce/taxonomy/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ebaytaxonomy.Configuration(
+    host = "https://api.ebay.com/commerce/taxonomy/v1"
+)
 
-# create an instance of the API class
-api_instance = ebaytaxonomy.CategoryTreeApi(ebaytaxonomy.ApiClient(configuration))
-category_tree_id = 'category_tree_id_example' # str | The unique identifier of the eBay category tree.<br><br>The category tree ID for an eBay marketplace can be retrieved using the <a href=\"/api-docs/commerce/taxonomy/resources/category_tree/methods/getDefaultCategoryTreeId\">getDefaultCategoryTreeId</a> method.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    api_response = api_instance.get_expired_categories(category_tree_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CategoryTreeApi->get_expired_categories: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with ebaytaxonomy.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ebaytaxonomy.CategoryTreeApi(api_client)
+    category_tree_id = 'category_tree_id_example' # str | The unique identifier of the eBay category tree.<br><br>The category tree ID for an eBay marketplace can be retrieved using the <a href=\"/api-docs/commerce/taxonomy/resources/category_tree/methods/getDefaultCategoryTreeId\">getDefaultCategoryTreeId</a> method.
+
+    try:
+        api_response = api_instance.get_expired_categories(category_tree_id)
+        print("The response of CategoryTreeApi->get_expired_categories:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CategoryTreeApi->get_expired_categories: %s\n" % e)
 ```
 
+
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -443,40 +644,65 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**204** | No content |  -  |
+**400** | Bad Request |  -  |
+**404** | Not found |  -  |
+**500** | Internal Server Error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_item_aspects_for_category**
 > AspectMetadata get_item_aspects_for_category(category_id, category_tree_id)
 
-
-
 This call returns a list of <i>aspects</i> that are appropriate or necessary for accurately describing items in the specified leaf category. Each aspect identifies an item attribute (for example, color,) for which the seller will be required or encouraged to provide a value (or variation values) when offering an item in that category on eBay.<br><br>For each aspect, <b>getItemAspectsForCategory</b> provides complete metadata, including: <ul><li>The aspect's data type, format, and entry mode</li><li>Whether the aspect is required in listings</li><li>Whether the aspect can be used for item variations</li><li>Whether the aspect accepts multiple values for an item</li><li>Allowed values for the aspect</li></ul> Use this information to construct an interface through which sellers can enter or select the appropriate values for their items or item variations. Once you collect those values, include them as product aspects when creating inventory items using the Inventory API.
 
 ### Example
+
+* OAuth Authentication (api_auth):
+
 ```python
-from __future__ import print_function
-import time
 import ebaytaxonomy
+from ebaytaxonomy.models.aspect_metadata import AspectMetadata
 from ebaytaxonomy.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: api_auth
-configuration = ebaytaxonomy.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.ebay.com/commerce/taxonomy/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ebaytaxonomy.Configuration(
+    host = "https://api.ebay.com/commerce/taxonomy/v1"
+)
 
-# create an instance of the API class
-api_instance = ebaytaxonomy.CategoryTreeApi(ebaytaxonomy.ApiClient(configuration))
-category_id = 'category_id_example' # str | The unique identifier of the leaf category for which aspects are being requested.<br><br><span class=\"tablenote\"> <strong>Note:</strong> If the <b>category_id</b> submitted does not identify a leaf node of the tree, this call returns an error. </span>
-category_tree_id = 'category_tree_id_example' # str | The unique identifier of the eBay category tree. The category tree ID for an eBay marketplace can be retrieved using the <b>getDefaultCategoryTreeId</b> method.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    api_response = api_instance.get_item_aspects_for_category(category_id, category_tree_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CategoryTreeApi->get_item_aspects_for_category: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with ebaytaxonomy.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ebaytaxonomy.CategoryTreeApi(api_client)
+    category_id = 'category_id_example' # str | The unique identifier of the leaf category for which aspects are being requested.<br><br><span class=\"tablenote\"> <strong>Note:</strong> If the <b>category_id</b> submitted does not identify a leaf node of the tree, this call returns an error. </span>
+    category_tree_id = 'category_tree_id_example' # str | The unique identifier of the eBay category tree. The category tree ID for an eBay marketplace can be retrieved using the <b>getDefaultCategoryTreeId</b> method.
+
+    try:
+        api_response = api_instance.get_item_aspects_for_category(category_id, category_tree_id)
+        print("The response of CategoryTreeApi->get_item_aspects_for_category:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CategoryTreeApi->get_item_aspects_for_category: %s\n" % e)
 ```
 
+
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -495,6 +721,16 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**204** | No Content |  -  |
+**400** | Bad Request |  -  |
+**404** | Not found |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

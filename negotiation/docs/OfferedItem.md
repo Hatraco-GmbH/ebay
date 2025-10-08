@@ -1,6 +1,9 @@
 # OfferedItem
 
+A complex type that defines the offer being made to an \"interested\" buyer.
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **discount_percentage** | **str** | This value denotes the percentage that the listing in the offer will be discounted from its original listed price.  &lt;br&gt;&lt;br&gt;The seller can specify either the exact price of the discounted items with the &lt;b&gt;price&lt;/b&gt; field or they can use this field to specify the percentage that the listing will be discounted, but not both.  &lt;br&gt;&lt;br&gt;&lt;b&gt;Minimum:&lt;/b&gt; &lt;code&gt;5&lt;/code&gt;  &lt;br&gt;&lt;br&gt;&lt;i&gt;Required if&lt;/i&gt; you do not specify a &lt;b&gt;price&lt;/b&gt; value. | [optional] 
@@ -8,5 +11,23 @@ Name | Type | Description | Notes
 **price** | [**Amount**](Amount.md) |  | [optional] 
 **quantity** | **int** | This integer value indicates the number of items in the eBay listing for which the offer is being made.  &lt;br&gt;&lt;br&gt;The offer being made by the seller is an \&quot;all or nothing\&quot; offer, meaning the buyer must purchase the indicated quantity of items in order to receive the discount on the transaction.  &lt;br&gt;&lt;br&gt;&lt;b&gt;Default:&lt;/b&gt; &lt;code&gt;1&lt;/code&gt; | [optional] 
 
+## Example
+
+```python
+from ebaynegotiation.models.offered_item import OfferedItem
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of OfferedItem from a JSON string
+offered_item_instance = OfferedItem.from_json(json)
+# print the JSON string representation of the object
+print(OfferedItem.to_json())
+
+# convert the object into a dict
+offered_item_dict = offered_item_instance.to_dict()
+# create an instance of OfferedItem from a dict
+offered_item_from_dict = OfferedItem.from_dict(offered_item_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
 

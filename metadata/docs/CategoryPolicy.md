@@ -1,25 +1,46 @@
 # CategoryPolicy
 
+This type contains applicable policy metadata for the leaf categories returned for the marketplace.
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**auto_pay_enabled** | **bool** | If this field is returned as &lt;code&gt;true&lt;/code&gt;, the corresponding category supports immediate payment for listings. The immediate payment feature is applicable to fixed-price listings, to auction listings with the &#x27;Buy It Now&#x27; option enabled, and for a motor vehicle listing that requires an initial deposit. If the immediate payment feature is enabled for a listing, the buyer must pay immediately after clicking the &#x27;Buy it Now&#x27; button. &lt;p&gt;This field is only returned when &lt;code&gt;true&lt;/code&gt; (not returned when false).&lt;/p&gt; | [optional] 
+**auto_pay_enabled** | **bool** | If this field is returned as &lt;code&gt;true&lt;/code&gt;, the corresponding category supports immediate payment for listings. The immediate payment feature is applicable to fixed-price listings, to auction listings with the &#39;Buy It Now&#39; option enabled, and for a motor vehicle listing that requires an initial deposit. If the immediate payment feature is enabled for a listing, the buyer must pay immediately after clicking the &#39;Buy it Now&#39; button. &lt;p&gt;This field is only returned when &lt;code&gt;true&lt;/code&gt; (not returned when false).&lt;/p&gt; | [optional] 
 **b2b_vat_enabled** | **bool** | If this field is returned as &lt;code&gt;true&lt;/code&gt;, the corresponding category supports business-to-business (B2B) VAT listings. If this field is not present, the category does not have B2B VAT listings. This feature is applicable to the eBay Germany (DE), Austria (AT), and Switzerland (CH) sites only.&lt;p&gt;This field is only returned when &lt;code&gt;true&lt;/code&gt; (not returned when false).&lt;/p&gt; | [optional] 
 **category_id** | **str** | The unique identifier of the eBay leaf category for which metadata is being returned. | [optional] 
 **category_tree_id** | **str** | The unique identifier of the category tree. | [optional] 
-**ean_support** | **str** | This enumerated value indicates whether or not European Article Numbers (EANs) are supported/required when listing products in the category. For implementation help, refer to &lt;a href&#x3D;&#x27;https://developer.ebay.com/api-docs/sell/metadata/types/sel:ProductIdentiferEnabledEnum&#x27;&gt;eBay API documentation&lt;/a&gt; | [optional] 
+**ean_support** | **str** | This enumerated value indicates whether or not European Article Numbers (EANs) are supported/required when listing products in the category. For implementation help, refer to &lt;a href&#x3D;&#39;https://developer.ebay.com/api-docs/sell/metadata/types/sel:ProductIdentiferEnabledEnum&#39;&gt;eBay API documentation&lt;/a&gt; | [optional] 
 **expired** | **bool** | If this field is returned as &lt;code&gt;true&lt;/code&gt;, the corresponding category is no longer a valid eBay category on the site, and items may not be listed in this category. You can use the &lt;a href&#x3D;\&quot;/api-docs/sell/taxonomy/resources/category_tree/methods/getExpiredCategories\&quot; target&#x3D;\&quot;_blank\&quot;&gt;getExpiredCategories&lt;/a&gt; method (of the &lt;b&gt;Taxonomy API&lt;/b&gt;) to find the leaf category that replaced the expired category. &lt;p&gt;This field is only returned when &lt;code&gt;true&lt;/code&gt; (not returned when false).&lt;/p&gt; | [optional] 
 **intangible_enabled** | **bool** | If this field is returned as &lt;code&gt;true&lt;/code&gt;, the category supports the listing of intangible goods or services. | [optional] 
-**isbn_support** | **str** | This enumerated value indicates whether or not International Standard Book Numbers (ISBNs) are supported/required when listing products in the specified category. For implementation help, refer to &lt;a href&#x3D;&#x27;https://developer.ebay.com/api-docs/sell/metadata/types/sel:ProductIdentiferEnabledEnum&#x27;&gt;eBay API documentation&lt;/a&gt; | [optional] 
+**isbn_support** | **str** | This enumerated value indicates whether or not International Standard Book Numbers (ISBNs) are supported/required when listing products in the specified category. For implementation help, refer to &lt;a href&#x3D;&#39;https://developer.ebay.com/api-docs/sell/metadata/types/sel:ProductIdentiferEnabledEnum&#39;&gt;eBay API documentation&lt;/a&gt; | [optional] 
 **lsd** | **bool** | If this field (Lot Size Disabled) is returned as &lt;code&gt;true&lt;/code&gt;, the corresponding category does not support lot listings. A lot listing is a listing that features multiple related items that must be purchased by one buyer in one transaction. &lt;p&gt;This field is only returned when &lt;code&gt;true&lt;/code&gt; (not returned when false).&lt;/p&gt; | [optional] 
 **minimum_reserve_price** | **float** | Indicates the Minimum Reserve Price for an auction listing in this category. If there is no Minimum Reserve Price, a value of &lt;code&gt;0.0&lt;/code&gt; is returned in this field. | [optional] 
 **orpa** | **bool** | If this field (Override Reserve Price Allowed) is returned as &lt;code&gt;true&lt;/code&gt;, all leaf categories on the site allow the seller to completely remove the reserve price for an active auction listing. For information on removing or reducing reserve prices, see &lt;a href&#x3D;\&quot;https://www.ebay.com/help/selling/listings/selling-auctions/reserve-prices?id&#x3D;4143\&quot;  target&#x3D;\&quot;_blank\&quot;&gt;Setting a reserve price&lt;/a&gt;. | [optional] 
 **orra** | **bool** | If this field (Override Reduce Reserve Allowed) is returned as &lt;code&gt;true&lt;/code&gt;, the seller can reduce or remove a reserve price that had already been reduced for an active auction listing. | [optional] 
-**payment_methods** | **list[str]** | An array that indicates the acceptable offline payment methods that can be used when listing an item for sale in the corresponding category. | [optional] 
-**reduce_reserve_allowed** | **bool** | If this field (Reduce Reserve Allowed) is &lt;code&gt;true&lt;/code&gt;, the corresponding leaf category allows the seller to reduce an item&#x27;s reserve price. If false, this field is not returned in the response and the corresponding leaf category on the site do not normally allow sellers to reduce an item&#x27;s reserve price.&lt;p&gt;This field is only returned when &lt;code&gt;true&lt;/code&gt; (not returned when false).&lt;/p&gt; | [optional] 
-**upc_support** | **str** | This enumerated value indicates whether or not the category on the specified eBay site supports the use of Universal Product Codes (UPCs) to help create a listing. For implementation help, refer to &lt;a href&#x3D;&#x27;https://developer.ebay.com/api-docs/sell/metadata/types/sel:ProductIdentiferEnabledEnum&#x27;&gt;eBay API documentation&lt;/a&gt; | [optional] 
+**payment_methods** | **List[str]** | An array that indicates the acceptable offline payment methods that can be used when listing an item for sale in the corresponding category. | [optional] 
+**reduce_reserve_allowed** | **bool** | If this field (Reduce Reserve Allowed) is &lt;code&gt;true&lt;/code&gt;, the corresponding leaf category allows the seller to reduce an item&#39;s reserve price. If false, this field is not returned in the response and the corresponding leaf category on the site do not normally allow sellers to reduce an item&#39;s reserve price.&lt;p&gt;This field is only returned when &lt;code&gt;true&lt;/code&gt; (not returned when false).&lt;/p&gt; | [optional] 
+**upc_support** | **str** | This enumerated value indicates whether or not the category on the specified eBay site supports the use of Universal Product Codes (UPCs) to help create a listing. For implementation help, refer to &lt;a href&#x3D;&#39;https://developer.ebay.com/api-docs/sell/metadata/types/sel:ProductIdentiferEnabledEnum&#39;&gt;eBay API documentation&lt;/a&gt; | [optional] 
 **value_category** | **bool** | When returned as &lt;code&gt;true&lt;/code&gt;, this boolean indicates that the leaf category for the specified site is designated by eBay as a value category. Value categories can be used as a secondary category for a listing at no extra charge. | [optional] 
 **virtual** | **bool** | If this field is returned as &lt;code&gt;true&lt;/code&gt;, the corresponding category is an eBay virtual category, a category in which items may not be listed.&lt;p&gt;This field is only returned when &lt;code&gt;true&lt;/code&gt; (not returned when false).&lt;/p&gt; | [optional] 
 
+## Example
+
+```python
+from ebaymetadata.models.category_policy import CategoryPolicy
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of CategoryPolicy from a JSON string
+category_policy_instance = CategoryPolicy.from_json(json)
+# print the JSON string representation of the object
+print(CategoryPolicy.to_json())
+
+# convert the object into a dict
+category_policy_dict = category_policy_instance.to_dict()
+# create an instance of CategoryPolicy from a dict
+category_policy_from_dict = CategoryPolicy.from_dict(category_policy_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
 

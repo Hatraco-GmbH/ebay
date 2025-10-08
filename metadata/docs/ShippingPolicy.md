@@ -1,6 +1,8 @@
 # ShippingPolicy
 
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **category_id** | **str** | The unique identifier of the eBay leaf category for which metadata is being returned. | [optional] 
@@ -9,9 +11,27 @@ Name | Type | Description | Notes
 **group1_max_flat_shipping_cost** | [**Amount**](Amount.md) |  | [optional] 
 **group2_max_flat_shipping_cost** | [**Amount**](Amount.md) |  | [optional] 
 **group3_max_flat_shipping_cost** | [**Amount**](Amount.md) |  | [optional] 
-**handling_time_enabled** | **bool** | Indicates if a seller&#x27;s stated handling time is enabled for a category. A handling time is generally needed for items that are shipped to the buyer, but not necessarily applicable to freight shipping or local pickup. | [optional] 
+**handling_time_enabled** | **bool** | Indicates if a seller&#39;s stated handling time is enabled for a category. A handling time is generally needed for items that are shipped to the buyer, but not necessarily applicable to freight shipping or local pickup. | [optional] 
 **max_flat_shipping_cost** | [**Amount**](Amount.md) |  | [optional] 
 **shipping_terms_required** | **bool** | Indicates whether the category requires sellers to specify shipping details at listing time. | [optional] 
 
+## Example
+
+```python
+from ebaymetadata.models.shipping_policy import ShippingPolicy
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ShippingPolicy from a JSON string
+shipping_policy_instance = ShippingPolicy.from_json(json)
+# print the JSON string representation of the object
+print(ShippingPolicy.to_json())
+
+# convert the object into a dict
+shipping_policy_dict = shipping_policy_instance.to_dict()
+# create an instance of ShippingPolicy from a dict
+shipping_policy_from_dict = ShippingPolicy.from_dict(shipping_policy_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
 

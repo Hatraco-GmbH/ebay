@@ -1,6 +1,8 @@
 # ReturnPolicy
 
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **category_id** | **str** | The category ID to which the return policies apply. | [optional] 
@@ -9,5 +11,23 @@ Name | Type | Description | Notes
 **international** | [**ReturnPolicyDetails**](ReturnPolicyDetails.md) |  | [optional] 
 **required** | **bool** | If set to &lt;code&gt;true&lt;/code&gt;, this flag indicates that you must specify a return policy for items listed in the associated category.  &lt;br&gt;&lt;br&gt;Note that not accepting returns (setting &lt;b&gt;returnsAcceptedEnabled&lt;/b&gt; to &lt;code&gt;false&lt;/code&gt;) is a valid return policy. | [optional] 
 
+## Example
+
+```python
+from ebaymetadata.models.return_policy import ReturnPolicy
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ReturnPolicy from a JSON string
+return_policy_instance = ReturnPolicy.from_json(json)
+# print the JSON string representation of the object
+print(ReturnPolicy.to_json())
+
+# convert the object into a dict
+return_policy_dict = return_policy_instance.to_dict()
+# create an instance of ReturnPolicy from a dict
+return_policy_from_dict = ReturnPolicy.from_dict(return_policy_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
 

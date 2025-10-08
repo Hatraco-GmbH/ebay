@@ -1,10 +1,31 @@
 # CompatibilityProperty
 
+This type is used by the <strong>compatibilityProperties</strong> array that is returned in the <strong>getCompatibilityProperties</strong> call. The <strong>compatibilityProperties</strong> container consists of an array of all compatible vehicle properties applicable to the specified eBay marketplace and eBay category ID.
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | This is the actual name of the compatible vehicle property as it is known on the specified eBay marketplace and in the eBay category. This is the string value that should be used in the &lt;strong&gt;compatibility_property&lt;/strong&gt; and &lt;strong&gt;filter&lt;/strong&gt; query parameters of a &lt;strong&gt;getCompatibilityPropertyValues&lt;/strong&gt; request URI. &lt;br&gt;&lt;br&gt; Typical vehicle properties are &#x27;Make&#x27;, &#x27;Model&#x27;, &#x27;Year&#x27;, &#x27;Engine&#x27;, and &#x27;Trim&#x27;, but will vary based on the eBay marketplace and the eBay category. | [optional] 
+**name** | **str** | This is the actual name of the compatible vehicle property as it is known on the specified eBay marketplace and in the eBay category. This is the string value that should be used in the &lt;strong&gt;compatibility_property&lt;/strong&gt; and &lt;strong&gt;filter&lt;/strong&gt; query parameters of a &lt;strong&gt;getCompatibilityPropertyValues&lt;/strong&gt; request URI. &lt;br&gt;&lt;br&gt; Typical vehicle properties are &#39;Make&#39;, &#39;Model&#39;, &#39;Year&#39;, &#39;Engine&#39;, and &#39;Trim&#39;, but will vary based on the eBay marketplace and the eBay category. | [optional] 
 **localized_name** | **str** | This is the localized name of the compatible vehicle property. The language that is used will depend on the user making the call, or based on the language specified if the &lt;strong&gt;Content-Language&lt;/strong&gt; HTTP header is used.&lt;br&gt;&lt;br&gt;In some instances, the string value in this field may be the same as the string in the corresponding &lt;strong&gt;name&lt;/strong&gt; field. | [optional] 
 
+## Example
+
+```python
+from ebaytaxonomy.models.compatibility_property import CompatibilityProperty
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of CompatibilityProperty from a JSON string
+compatibility_property_instance = CompatibilityProperty.from_json(json)
+# print the JSON string representation of the object
+print(CompatibilityProperty.to_json())
+
+# convert the object into a dict
+compatibility_property_dict = compatibility_property_instance.to_dict()
+# create an instance of CompatibilityProperty from a dict
+compatibility_property_from_dict = CompatibilityProperty.from_dict(compatibility_property_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
 

@@ -1,6 +1,6 @@
 # ebayfulfillment.PaymentDisputeApi
 
-All URIs are relative to *https://api.ebay.com{basePath}*
+All URIs are relative to *https://api.ebay.com/sell/fulfillment/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -14,45 +14,62 @@ Method | HTTP request | Description
 [**update_evidence**](PaymentDisputeApi.md#update_evidence) | **POST** /payment_dispute/{payment_dispute_id}/update_evidence | Update evidence
 [**upload_evidence_file**](PaymentDisputeApi.md#upload_evidence_file) | **POST** /payment_dispute/{payment_dispute_id}/upload_evidence_file | Upload an Evidence File
 
+
 # **accept_payment_dispute**
-> accept_payment_dispute(content_type, payment_dispute_id, body=body)
+> accept_payment_dispute(payment_dispute_id, content_type, accept_payment_dispute_request=accept_payment_dispute_request)
 
 Accept Payment Dispute
 
 This method is used if the seller wishes to accept a payment dispute. The unique identifier of the payment dispute is passed in as a path parameter, and unique identifiers for payment disputes can be retrieved with the <strong>getPaymentDisputeSummaries</strong> method.<br><br>The <strong>revision</strong> field in the request payload is required, and the <strong>returnAddress</strong> field should be supplied if the seller is expecting the buyer to return the item. See the Request Payload section for more information on theste fields.
 
 ### Example
+
+* OAuth Authentication (api_auth):
+
 ```python
-from __future__ import print_function
-import time
 import ebayfulfillment
+from ebayfulfillment.models.accept_payment_dispute_request import AcceptPaymentDisputeRequest
 from ebayfulfillment.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: api_auth
-configuration = ebayfulfillment.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.ebay.com/sell/fulfillment/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ebayfulfillment.Configuration(
+    host = "https://api.ebay.com/sell/fulfillment/v1"
+)
 
-# create an instance of the API class
-api_instance = ebayfulfillment.PaymentDisputeApi(ebayfulfillment.ApiClient(configuration))
-content_type = 'content_type_example' # str | This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.
-payment_dispute_id = 'payment_dispute_id_example' # str | This parameter is used to specify the unique identifier of the payment dispute being accepted. <br><br> Use the <a href=\"/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDisputeSummaries\" target=\"_blank \">getPaymentDisputeSummaries</a> method to retrieve payment dispute IDs.
-body = ebayfulfillment.AcceptPaymentDisputeRequest() # AcceptPaymentDisputeRequest |  (optional)
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Accept Payment Dispute
-    api_instance.accept_payment_dispute(content_type, payment_dispute_id, body=body)
-except ApiException as e:
-    print("Exception when calling PaymentDisputeApi->accept_payment_dispute: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with ebayfulfillment.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ebayfulfillment.PaymentDisputeApi(api_client)
+    payment_dispute_id = 'payment_dispute_id_example' # str | This parameter is used to specify the unique identifier of the payment dispute being accepted. <br><br> Use the <a href=\"/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDisputeSummaries\" target=\"_blank \">getPaymentDisputeSummaries</a> method to retrieve payment dispute IDs.
+    content_type = 'content_type_example' # str | This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.
+    accept_payment_dispute_request = ebayfulfillment.AcceptPaymentDisputeRequest() # AcceptPaymentDisputeRequest |  (optional)
+
+    try:
+        # Accept Payment Dispute
+        api_instance.accept_payment_dispute(payment_dispute_id, content_type, accept_payment_dispute_request=accept_payment_dispute_request)
+    except Exception as e:
+        print("Exception when calling PaymentDisputeApi->accept_payment_dispute: %s\n" % e)
 ```
+
+
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **content_type** | **str**| This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;application/json&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. | 
  **payment_dispute_id** | **str**| This parameter is used to specify the unique identifier of the payment dispute being accepted. &lt;br&gt;&lt;br&gt; Use the &lt;a href&#x3D;\&quot;/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDisputeSummaries\&quot; target&#x3D;\&quot;_blank \&quot;&gt;getPaymentDisputeSummaries&lt;/a&gt; method to retrieve payment dispute IDs. | 
- **body** | [**AcceptPaymentDisputeRequest**](AcceptPaymentDisputeRequest.md)|  | [optional] 
+ **content_type** | **str**| This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;application/json&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. | 
+ **accept_payment_dispute_request** | [**AcceptPaymentDisputeRequest**](AcceptPaymentDisputeRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -67,48 +84,76 @@ void (empty response body)
  - **Content-Type**: application/json
  - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Success |  -  |
+**400** | Bad Request |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
+**500** | Internal Server Error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **add_evidence**
-> AddEvidencePaymentDisputeResponse add_evidence(content_type, payment_dispute_id, body=body)
+> AddEvidencePaymentDisputeResponse add_evidence(payment_dispute_id, content_type, add_evidence_payment_dispute_request=add_evidence_payment_dispute_request)
 
 Add an Evidence File
 
-This method is used by the seller to add one or more evidence files to address a payment dispute initiated by the buyer. The unique identifier of the payment dispute is passed in as a path parameter, and unique identifiers for payment disputes can be retrieved with the <strong>getPaymentDisputeSummaries</strong> method.<br><br><span class=\"tablenote\"><strong>Note:</strong> All evidence files should be uploaded using <strong>addEvidence</strong> and <strong>updateEvidence</strong>  before the seller decides to contest the payment dispute. Once the seller has officially contested the dispute (using <strong>contestPaymentDispute</strong> or through My eBay), the <strong>addEvidence</strong> and <strong>updateEvidence</strong> methods can no longer be used. In the <strong>evidenceRequests</strong> array of the <strong>getPaymentDispute</strong> response, eBay prompts the seller with the type of evidence file(s) that will be needed to contest the payment dispute.</span><br><br>The file(s) to add are identified through the <strong>files</strong> array in the request payload.  Adding one or more new evidence files for a payment dispute triggers the creation of an evidence file, and the unique identifier for the new evidence file is automatically generated and returned in the <strong>evidenceId</strong> field of the <strong>addEvidence</strong> response payload upon a successful call.<br><br>The type of evidence being added should be specified in the <strong>evidenceType</strong> field. All files being added (if more than one) should correspond to this evidence type.<br><br>Upon a successful call, an <strong>evidenceId</strong> value is returned in the response. This indicates that a new evidence set has been created for the payment dispute, and this evidence set includes the evidence file(s) that were passed in to the <strong>fileId</strong> array. The <strong>evidenceId</strong> value will be needed if the seller wishes to add to the evidence set by using the <strong>updateEvidence</strong> method, or if they want to retrieve a specific evidence file within the evidence set by using the <strong>fetchEvidenceContent</strong> method.
+This method is used by the seller to add one or more evidence files to address a payment dispute initiated by the buyer. The unique identifier of the payment dispute is passed in as a path parameter, and unique identifiers for payment disputes can be retrieved with the <strong>getPaymentDisputeSummaries</strong> method.<br><br><span class="tablenote"><strong>Note:</strong> All evidence files should be uploaded using <strong>addEvidence</strong> and <strong>updateEvidence</strong>  before the seller decides to contest the payment dispute. Once the seller has officially contested the dispute (using <strong>contestPaymentDispute</strong> or through My eBay), the <strong>addEvidence</strong> and <strong>updateEvidence</strong> methods can no longer be used. In the <strong>evidenceRequests</strong> array of the <strong>getPaymentDispute</strong> response, eBay prompts the seller with the type of evidence file(s) that will be needed to contest the payment dispute.</span><br><br>The file(s) to add are identified through the <strong>files</strong> array in the request payload.  Adding one or more new evidence files for a payment dispute triggers the creation of an evidence file, and the unique identifier for the new evidence file is automatically generated and returned in the <strong>evidenceId</strong> field of the <strong>addEvidence</strong> response payload upon a successful call.<br><br>The type of evidence being added should be specified in the <strong>evidenceType</strong> field. All files being added (if more than one) should correspond to this evidence type.<br><br>Upon a successful call, an <strong>evidenceId</strong> value is returned in the response. This indicates that a new evidence set has been created for the payment dispute, and this evidence set includes the evidence file(s) that were passed in to the <strong>fileId</strong> array. The <strong>evidenceId</strong> value will be needed if the seller wishes to add to the evidence set by using the <strong>updateEvidence</strong> method, or if they want to retrieve a specific evidence file within the evidence set by using the <strong>fetchEvidenceContent</strong> method.
 
 ### Example
+
+* OAuth Authentication (api_auth):
+
 ```python
-from __future__ import print_function
-import time
 import ebayfulfillment
+from ebayfulfillment.models.add_evidence_payment_dispute_request import AddEvidencePaymentDisputeRequest
+from ebayfulfillment.models.add_evidence_payment_dispute_response import AddEvidencePaymentDisputeResponse
 from ebayfulfillment.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: api_auth
-configuration = ebayfulfillment.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.ebay.com/sell/fulfillment/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ebayfulfillment.Configuration(
+    host = "https://api.ebay.com/sell/fulfillment/v1"
+)
 
-# create an instance of the API class
-api_instance = ebayfulfillment.PaymentDisputeApi(ebayfulfillment.ApiClient(configuration))
-content_type = 'content_type_example' # str | This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.
-payment_dispute_id = 'payment_dispute_id_example' # str | This parameter is used to specify the unique identifier of the contested payment dispute for which the seller wishes to add evidence files. <br><br> Use the <a href=\"/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDisputeSummaries\" target=\"_blank \">getPaymentDisputeSummaries</a> method to retrieve payment dispute IDs.
-body = ebayfulfillment.AddEvidencePaymentDisputeRequest() # AddEvidencePaymentDisputeRequest |  (optional)
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Add an Evidence File
-    api_response = api_instance.add_evidence(content_type, payment_dispute_id, body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling PaymentDisputeApi->add_evidence: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with ebayfulfillment.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ebayfulfillment.PaymentDisputeApi(api_client)
+    payment_dispute_id = 'payment_dispute_id_example' # str | This parameter is used to specify the unique identifier of the contested payment dispute for which the seller wishes to add evidence files. <br><br> Use the <a href=\"/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDisputeSummaries\" target=\"_blank \">getPaymentDisputeSummaries</a> method to retrieve payment dispute IDs.
+    content_type = 'content_type_example' # str | This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.
+    add_evidence_payment_dispute_request = ebayfulfillment.AddEvidencePaymentDisputeRequest() # AddEvidencePaymentDisputeRequest |  (optional)
+
+    try:
+        # Add an Evidence File
+        api_response = api_instance.add_evidence(payment_dispute_id, content_type, add_evidence_payment_dispute_request=add_evidence_payment_dispute_request)
+        print("The response of PaymentDisputeApi->add_evidence:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentDisputeApi->add_evidence: %s\n" % e)
 ```
+
+
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **content_type** | **str**| This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;application/json&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. | 
  **payment_dispute_id** | **str**| This parameter is used to specify the unique identifier of the contested payment dispute for which the seller wishes to add evidence files. &lt;br&gt;&lt;br&gt; Use the &lt;a href&#x3D;\&quot;/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDisputeSummaries\&quot; target&#x3D;\&quot;_blank \&quot;&gt;getPaymentDisputeSummaries&lt;/a&gt; method to retrieve payment dispute IDs. | 
- **body** | [**AddEvidencePaymentDisputeRequest**](AddEvidencePaymentDisputeRequest.md)|  | [optional] 
+ **content_type** | **str**| This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;application/json&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. | 
+ **add_evidence_payment_dispute_request** | [**AddEvidencePaymentDisputeRequest**](AddEvidencePaymentDisputeRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -123,47 +168,73 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
+**500** | Internal Server Error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **contest_payment_dispute**
-> contest_payment_dispute(content_type, payment_dispute_id, body=body)
+> contest_payment_dispute(payment_dispute_id, content_type, contest_payment_dispute_request=contest_payment_dispute_request)
 
 Contest Payment Dispute
 
-This method is used if the seller wishes to contest a payment dispute initiated by the buyer. The unique identifier of the payment dispute is passed in as a path parameter, and unique identifiers for payment disputes can be retrieved with the <strong>getPaymentDisputeSummaries</strong> method.<br><br><span class=\"tablenote\"><strong>Note:</strong> Before contesting a payment dispute, the seller must upload all supporting files using the <strong>addEvidence</strong> and <strong>updateEvidence</strong> methods. Once the seller has officially contested the dispute (using <strong>contestPaymentDispute</strong>), the <strong>addEvidence</strong> and <strong>updateEvidence</strong> methods can no longer be used. In the <strong>evidenceRequests</strong> array of the <strong>getPaymentDispute</strong> response, eBay prompts the seller with the type of supporting file(s) that will be needed to contest the payment dispute.</span><br><br>If a seller decides to contest a payment dispute, that seller should be prepared to provide supporting documents such as proof of delivery, proof of authentication, or other documents. The type of supporting documents that the seller will provide will depend on why the buyer filed the payment dispute.<br><br>The <strong>revision</strong> field in the request payload is required, and the <strong>returnAddress</strong> field should be supplied if the seller is expecting the buyer to return the item. See the Request Payload section for more information on these fields.
+This method is used if the seller wishes to contest a payment dispute initiated by the buyer. The unique identifier of the payment dispute is passed in as a path parameter, and unique identifiers for payment disputes can be retrieved with the <strong>getPaymentDisputeSummaries</strong> method.<br><br><span class="tablenote"><strong>Note:</strong> Before contesting a payment dispute, the seller must upload all supporting files using the <strong>addEvidence</strong> and <strong>updateEvidence</strong> methods. Once the seller has officially contested the dispute (using <strong>contestPaymentDispute</strong>), the <strong>addEvidence</strong> and <strong>updateEvidence</strong> methods can no longer be used. In the <strong>evidenceRequests</strong> array of the <strong>getPaymentDispute</strong> response, eBay prompts the seller with the type of supporting file(s) that will be needed to contest the payment dispute.</span><br><br>If a seller decides to contest a payment dispute, that seller should be prepared to provide supporting documents such as proof of delivery, proof of authentication, or other documents. The type of supporting documents that the seller will provide will depend on why the buyer filed the payment dispute.<br><br>The <strong>revision</strong> field in the request payload is required, and the <strong>returnAddress</strong> field should be supplied if the seller is expecting the buyer to return the item. See the Request Payload section for more information on these fields.
 
 ### Example
+
+* OAuth Authentication (api_auth):
+
 ```python
-from __future__ import print_function
-import time
 import ebayfulfillment
+from ebayfulfillment.models.contest_payment_dispute_request import ContestPaymentDisputeRequest
 from ebayfulfillment.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: api_auth
-configuration = ebayfulfillment.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.ebay.com/sell/fulfillment/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ebayfulfillment.Configuration(
+    host = "https://api.ebay.com/sell/fulfillment/v1"
+)
 
-# create an instance of the API class
-api_instance = ebayfulfillment.PaymentDisputeApi(ebayfulfillment.ApiClient(configuration))
-content_type = 'content_type_example' # str | This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.
-payment_dispute_id = 'payment_dispute_id_example' # str | This parameter is used to specify the unique identifier of the payment dispute being contested. <br><br> Use the <a href=\"/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDisputeSummaries\" target=\"_blank \">getPaymentDisputeSummaries</a> method to retrieve payment dispute IDs.
-body = ebayfulfillment.ContestPaymentDisputeRequest() # ContestPaymentDisputeRequest |  (optional)
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Contest Payment Dispute
-    api_instance.contest_payment_dispute(content_type, payment_dispute_id, body=body)
-except ApiException as e:
-    print("Exception when calling PaymentDisputeApi->contest_payment_dispute: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with ebayfulfillment.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ebayfulfillment.PaymentDisputeApi(api_client)
+    payment_dispute_id = 'payment_dispute_id_example' # str | This parameter is used to specify the unique identifier of the payment dispute being contested. <br><br> Use the <a href=\"/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDisputeSummaries\" target=\"_blank \">getPaymentDisputeSummaries</a> method to retrieve payment dispute IDs.
+    content_type = 'content_type_example' # str | This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.
+    contest_payment_dispute_request = ebayfulfillment.ContestPaymentDisputeRequest() # ContestPaymentDisputeRequest |  (optional)
+
+    try:
+        # Contest Payment Dispute
+        api_instance.contest_payment_dispute(payment_dispute_id, content_type, contest_payment_dispute_request=contest_payment_dispute_request)
+    except Exception as e:
+        print("Exception when calling PaymentDisputeApi->contest_payment_dispute: %s\n" % e)
 ```
+
+
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **content_type** | **str**| This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;application/json&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. | 
  **payment_dispute_id** | **str**| This parameter is used to specify the unique identifier of the payment dispute being contested. &lt;br&gt;&lt;br&gt; Use the &lt;a href&#x3D;\&quot;/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDisputeSummaries\&quot; target&#x3D;\&quot;_blank \&quot;&gt;getPaymentDisputeSummaries&lt;/a&gt; method to retrieve payment dispute IDs. | 
- **body** | [**ContestPaymentDisputeRequest**](ContestPaymentDisputeRequest.md)|  | [optional] 
+ **content_type** | **str**| This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;application/json&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. | 
+ **contest_payment_dispute_request** | [**ContestPaymentDisputeRequest**](ContestPaymentDisputeRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -178,42 +249,68 @@ void (empty response body)
  - **Content-Type**: application/json
  - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Success |  -  |
+**400** | Bad Request |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
+**500** | Internal Server Error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **fetch_evidence_content**
-> list[str] fetch_evidence_content(payment_dispute_id, evidence_id, file_id)
+> List[str] fetch_evidence_content(payment_dispute_id, evidence_id, file_id)
 
 Get Payment Dispute Evidence File
 
 This call retrieves a specific evidence file for a payment dispute. The following three identifying parameters are needed in the call URI:<ul><li><strong>payment_dispute_id</strong>: the identifier of the payment dispute. The identifier of each payment dispute is returned in the <strong>getPaymentDisputeSummaries</strong> response.</li><li><strong>evidence_id</strong>: the identifier of the evidential file set. The identifier of an evidential file set for a payment dispute is returned under the <strong>evidence</strong> array in the <strong>getPaymentDispute</strong> response.</li><li><strong>file_id</strong>: the identifier of an evidential file. This file must belong to the evidential file set identified through the <strong>evidence_id</strong> query parameter. The identifier of each evidential file is returned under the <strong>evidence.files</strong> array in the <strong>getPaymentDispute</strong> response.</li></ul><p>An actual binary file is returned if the call is successful. An error will occur if any of three identifiers are invalid.</p>
 
 ### Example
+
+* OAuth Authentication (api_auth):
+
 ```python
-from __future__ import print_function
-import time
 import ebayfulfillment
 from ebayfulfillment.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: api_auth
-configuration = ebayfulfillment.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.ebay.com/sell/fulfillment/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ebayfulfillment.Configuration(
+    host = "https://api.ebay.com/sell/fulfillment/v1"
+)
 
-# create an instance of the API class
-api_instance = ebayfulfillment.PaymentDisputeApi(ebayfulfillment.ApiClient(configuration))
-payment_dispute_id = 'payment_dispute_id_example' # str | This path parameter is used to specify the unique identifier of the payment dispute associated with the evidence file being retrieved.<br><br> Use the <a href=\"/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDisputeSummaries\" target=\"_blank \">getPaymentDisputeSummaries</a> method to retrieve payment dispute IDs.
-evidence_id = 'evidence_id_example' # str | This query parameter is used to specify the unique identifier of the evidential file set.<br><br>The identifier of an evidential file set for a payment dispute is returned under the <strong>evidence</strong> array in the <a href=\"/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDispute\" target=\"_blank \">getPaymentDispute</a> response.
-file_id = 'file_id_example' # str | This query parameter is used to specify the unique identifier of an evidential file. This file must belong to the evidential file set identified through the <strong>evidence_id</strong> query parameter.<br><br>The identifier of each evidential file is returned under the <strong>evidence.files</strong> array in the <a href=\"/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDispute\" target=\"_blank \">getPaymentDispute</a> response.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Payment Dispute Evidence File
-    api_response = api_instance.fetch_evidence_content(payment_dispute_id, evidence_id, file_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling PaymentDisputeApi->fetch_evidence_content: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with ebayfulfillment.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ebayfulfillment.PaymentDisputeApi(api_client)
+    payment_dispute_id = 'payment_dispute_id_example' # str | This path parameter is used to specify the unique identifier of the payment dispute associated with the evidence file being retrieved.<br><br> Use the <a href=\"/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDisputeSummaries\" target=\"_blank \">getPaymentDisputeSummaries</a> method to retrieve payment dispute IDs.
+    evidence_id = 'evidence_id_example' # str | This query parameter is used to specify the unique identifier of the evidential file set.<br><br>The identifier of an evidential file set for a payment dispute is returned under the <strong>evidence</strong> array in the <a href=\"/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDispute\" target=\"_blank \">getPaymentDispute</a> response.
+    file_id = 'file_id_example' # str | This query parameter is used to specify the unique identifier of an evidential file. This file must belong to the evidential file set identified through the <strong>evidence_id</strong> query parameter.<br><br>The identifier of each evidential file is returned under the <strong>evidence.files</strong> array in the <a href=\"/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDispute\" target=\"_blank \">getPaymentDispute</a> response.
+
+    try:
+        # Get Payment Dispute Evidence File
+        api_response = api_instance.fetch_evidence_content(payment_dispute_id, evidence_id, file_id)
+        print("The response of PaymentDisputeApi->fetch_evidence_content:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentDisputeApi->fetch_evidence_content: %s\n" % e)
 ```
 
+
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -223,7 +320,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**list[str]**
+**List[str]**
 
 ### Authorization
 
@@ -233,6 +330,15 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/octet-stream
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**404** | Invalid Payment Dispute Id |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -244,30 +350,47 @@ Get Payment Dispute Activity
 This method retrieve a log of activity for a payment dispute. The identifier of the payment dispute is passed in as a path parameter. The output includes a timestamp for each action of the payment dispute, from creation to resolution, and all steps in between.
 
 ### Example
+
+* OAuth Authentication (api_auth):
+
 ```python
-from __future__ import print_function
-import time
 import ebayfulfillment
+from ebayfulfillment.models.payment_dispute_activity_history import PaymentDisputeActivityHistory
 from ebayfulfillment.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: api_auth
-configuration = ebayfulfillment.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.ebay.com/sell/fulfillment/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ebayfulfillment.Configuration(
+    host = "https://api.ebay.com/sell/fulfillment/v1"
+)
 
-# create an instance of the API class
-api_instance = ebayfulfillment.PaymentDisputeApi(ebayfulfillment.ApiClient(configuration))
-payment_dispute_id = 'payment_dispute_id_example' # str | This parameter is used to specify the unique identifier of the payment dispute associated with the activity log being retrieved.<br><br> Use the <a href=\"/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDisputeSummaries\" target=\"_blank \">getPaymentDisputeSummaries</a> method to retrieve payment dispute IDs.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Payment Dispute Activity
-    api_response = api_instance.get_activities(payment_dispute_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling PaymentDisputeApi->get_activities: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with ebayfulfillment.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ebayfulfillment.PaymentDisputeApi(api_client)
+    payment_dispute_id = 'payment_dispute_id_example' # str | This parameter is used to specify the unique identifier of the payment dispute associated with the activity log being retrieved.<br><br> Use the <a href=\"/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDisputeSummaries\" target=\"_blank \">getPaymentDisputeSummaries</a> method to retrieve payment dispute IDs.
+
+    try:
+        # Get Payment Dispute Activity
+        api_response = api_instance.get_activities(payment_dispute_id)
+        print("The response of PaymentDisputeApi->get_activities:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentDisputeApi->get_activities: %s\n" % e)
 ```
 
+
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -286,6 +409,15 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**404** | Invalid Payment Dispute Id |  -  |
+**500** | Internal Server Error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_payment_dispute**
@@ -296,30 +428,47 @@ Get Payment Dispute Details
 This method retrieves detailed information on a specific payment dispute. The payment dispute identifier is passed in as path parameter at the end of the call URI.<br><br>Below is a summary of the information that is retrieved:<ul><li>Current status of payment dispute</li><li>Amount of the payment dispute</li><li>Reason the payment dispute was opened</li><li>Order and line items associated with the payment dispute</li><li>Seller response options if an action is currently required on the payment dispute</li><li>Details on the results of the payment dispute if it has been closed</li><li>Details on any evidence that was provided by the seller to fight the payment dispute</li></ul>
 
 ### Example
+
+* OAuth Authentication (api_auth):
+
 ```python
-from __future__ import print_function
-import time
 import ebayfulfillment
+from ebayfulfillment.models.payment_dispute import PaymentDispute
 from ebayfulfillment.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: api_auth
-configuration = ebayfulfillment.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.ebay.com/sell/fulfillment/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ebayfulfillment.Configuration(
+    host = "https://api.ebay.com/sell/fulfillment/v1"
+)
 
-# create an instance of the API class
-api_instance = ebayfulfillment.PaymentDisputeApi(ebayfulfillment.ApiClient(configuration))
-payment_dispute_id = 'payment_dispute_id_example' # str | This parameter is used to specify the unique identifier of the payment dispute being retrieved.<br><br> Use the <a href=\"/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDisputeSummaries\" target=\"_blank \">getPaymentDisputeSummaries</a> method to retrieve payment dispute IDs.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Payment Dispute Details
-    api_response = api_instance.get_payment_dispute(payment_dispute_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling PaymentDisputeApi->get_payment_dispute: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with ebayfulfillment.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ebayfulfillment.PaymentDisputeApi(api_client)
+    payment_dispute_id = 'payment_dispute_id_example' # str | This parameter is used to specify the unique identifier of the payment dispute being retrieved.<br><br> Use the <a href=\"/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDisputeSummaries\" target=\"_blank \">getPaymentDisputeSummaries</a> method to retrieve payment dispute IDs.
+
+    try:
+        # Get Payment Dispute Details
+        api_response = api_instance.get_payment_dispute(payment_dispute_id)
+        print("The response of PaymentDisputeApi->get_payment_dispute:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentDisputeApi->get_payment_dispute: %s\n" % e)
 ```
 
+
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -338,6 +487,15 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**404** | Invalid Payment Dispute Id |  -  |
+**500** | Internal Server Error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_payment_dispute_summaries**
@@ -348,36 +506,53 @@ Search Payment Dispute by Filters
 This method is used retrieve one or more payment disputes filed against the seller. These payment disputes can be open or recently closed. The following filter types are available in the request payload to control the payment disputes that are returned:<ul><li>Dispute filed against a specific order (<b>order_id</b> parameter is used)</li><li>Dispute(s) filed by a specific buyer (<b>buyer_username</b> parameter is used)</li><li>Dispute(s) filed within a specific date range (<b>open_date_from</b> and/or <b>open_date_to</b> parameters are used)</li><li>Disputes in a specific state (<b>payment_dispute_status</b> parameter is used)</li></ul>More than one of these filter types can be used together. See the request payload request fields for more information about how each filter is used.<br><br>If none of the filters are used, all open and recently closed payment disputes are returned.<br><br>Pagination is also available. See the <b>limit</b> and <b>offset</b> fields for more information on how pagination is used for this method.
 
 ### Example
+
+* OAuth Authentication (api_auth):
+
 ```python
-from __future__ import print_function
-import time
 import ebayfulfillment
+from ebayfulfillment.models.dispute_summary_response import DisputeSummaryResponse
 from ebayfulfillment.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: api_auth
-configuration = ebayfulfillment.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.ebay.com/sell/fulfillment/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ebayfulfillment.Configuration(
+    host = "https://api.ebay.com/sell/fulfillment/v1"
+)
 
-# create an instance of the API class
-api_instance = ebayfulfillment.PaymentDisputeApi(ebayfulfillment.ApiClient(configuration))
-order_id = 'order_id_example' # str | This filter is used if the seller wishes to retrieve one or more payment disputes filed against a specific order. It is possible that there can be more than one dispute filed against an order if the order has multiple line items. If this filter is used, any other filters are ignored.<br><br>Use the <a href=\"/api-docs/sell/fulfillment/resources/order/methods/getOrders\" target=\"_blank \">getOrders</a> method to retrieve order IDs. Order ID values are also shown in My eBay/Seller Hub. (optional)
-buyer_username = 'buyer_username_example' # str | This filter is used if the seller wishes to retrieve one or more payment disputes opened by a specific buyer. The string that is passed in to this query parameter is the eBay user ID of the buyer. (optional)
-open_date_from = 'open_date_from_example' # str | The <b>open_date_from</b> and/or <b>open_date_to</b> date filters are used if the seller wishes to retrieve payment disputes opened within a specific date range. A maximum date range that may be set with the <b>open_date_from</b> and/or <b>open_date_to</b> filters is 90 days. These date filters use the ISO-8601 24-hour date and time format, and time zone used is Universal Coordinated Time (UTC), also known as Greenwich Mean Time (GMT), or Zulu.<br><br>The <b>open_date_from</b> field sets the beginning date of the date range, and can be set as far back as 18 months from the present time. If a <b>open_date_from</b> field is used, but a <b>open_date_to</b> field is not used, the <b>open_date_to</b> value will default to 90 days after the date specified in the <b>open_date_from</b> field, or to the present time if less than 90 days in the past.<br><br>The ISO-8601 format looks like this: <em>yyyy-MM-ddThh:mm.ss.sssZ</em>. An example would be <code>2019-08-04T19:09:02.768Z</code>. (optional)
-open_date_to = 'open_date_to_example' # str | The <b>open_date_from</b> and/or <b>open_date_to</b> date filters are used if the seller wishes to retrieve payment disputes opened within a specific date range. A maximum date range that may be set with the <b>open_date_from</b> and/or <b>open_date_to</b> filters is 90 days. These date filters use the ISO-8601 24-hour date and time format, and the time zone used is Universal Coordinated Time (UTC), also known as Greenwich Mean Time (GMT), or Zulu.<br><br>The <b>open_date_to</b> field sets the ending date of the date range, and can be set up to 90 days from the date set in the <b>open_date_from</b> field. <br><br>The ISO-8601 format looks like this: <em>yyyy-MM-ddThh:mm.ss.sssZ</em>. An example would be <code>2019-08-04T19:09:02.768Z</code>. (optional)
-payment_dispute_status = 'payment_dispute_status_example' # str | This filter is used if the seller wishes to only retrieve payment disputes in one or more specific states. To filter by more than one status value, a separate <b>payment_dispute_status</b> filter must be used for each value, as shown below:<br><br><i>https://apiz.ebay.com/sell/fulfillment/v1/payment_dispute_summary?payment_dispute_status=OPEN&payment_dispute_status=ACTION_NEEDED</i> <br><br>If no <b>payment_dispute_status</b> filter is used, payment disputes in all states are returned in the response.<br><br>See <a href=\"/api-docs/sell/fulfillment/types/api:DisputeStateEnum\" target=\"_blank \">DisputeStatusEnum</a> type for supported values. (optional)
-limit = 'limit_example' # str | The value passed in this query parameter sets the maximum number of payment disputes to return per page of data. The value passed in this field should be an integer from 1 to 200. If this query parameter is not set, up to 200 records will be returned on each page of results.<br><br><b>Min</b>: 1<br><br> <b>Max</b>: 200<br><br><b>Default</b>: 200 (optional)
-offset = 'offset_example' # str | This field is used to specify the number of records to skip in the result set before returning the first payment dispute in the paginated response. A zero-based index is used, so if you set the <b>offset</b> value to <code>0</code> (default value), the first payment dispute in the result set appears at the top of the response. <br><br>Combine <b>offset</b> with the <b>limit</b> parameter to control the payment disputes returned in the response. For example, if you supply an <b>offset</b> value of <code>0</code> and a <b>limit</b> value of <code>10</code>, the response will contain the first 10 payment disputes from the result set that matches the input criteria. If you supply an <b>offset</b> value of <code>10</code> and a <b>limit</b> value of <code>20</code>, the response will contain payment disputes 11-30 from the result set that matches the input criteria.<br><br><b>Min</b>: 0 <br><br><b>Default</b>: 0 (optional)
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Search Payment Dispute by Filters
-    api_response = api_instance.get_payment_dispute_summaries(order_id=order_id, buyer_username=buyer_username, open_date_from=open_date_from, open_date_to=open_date_to, payment_dispute_status=payment_dispute_status, limit=limit, offset=offset)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling PaymentDisputeApi->get_payment_dispute_summaries: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with ebayfulfillment.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ebayfulfillment.PaymentDisputeApi(api_client)
+    order_id = 'order_id_example' # str | This filter is used if the seller wishes to retrieve one or more payment disputes filed against a specific order. It is possible that there can be more than one dispute filed against an order if the order has multiple line items. If this filter is used, any other filters are ignored.<br><br>Use the <a href=\"/api-docs/sell/fulfillment/resources/order/methods/getOrders\" target=\"_blank \">getOrders</a> method to retrieve order IDs. Order ID values are also shown in My eBay/Seller Hub. (optional)
+    buyer_username = 'buyer_username_example' # str | This filter is used if the seller wishes to retrieve one or more payment disputes opened by a specific buyer. The string that is passed in to this query parameter is the eBay user ID of the buyer. (optional)
+    open_date_from = 'open_date_from_example' # str | The <b>open_date_from</b> and/or <b>open_date_to</b> date filters are used if the seller wishes to retrieve payment disputes opened within a specific date range. A maximum date range that may be set with the <b>open_date_from</b> and/or <b>open_date_to</b> filters is 90 days. These date filters use the ISO-8601 24-hour date and time format, and time zone used is Universal Coordinated Time (UTC), also known as Greenwich Mean Time (GMT), or Zulu.<br><br>The <b>open_date_from</b> field sets the beginning date of the date range, and can be set as far back as 18 months from the present time. If a <b>open_date_from</b> field is used, but a <b>open_date_to</b> field is not used, the <b>open_date_to</b> value will default to 90 days after the date specified in the <b>open_date_from</b> field, or to the present time if less than 90 days in the past.<br><br>The ISO-8601 format looks like this: <em>yyyy-MM-ddThh:mm.ss.sssZ</em>. An example would be <code>2019-08-04T19:09:02.768Z</code>. (optional)
+    open_date_to = 'open_date_to_example' # str | The <b>open_date_from</b> and/or <b>open_date_to</b> date filters are used if the seller wishes to retrieve payment disputes opened within a specific date range. A maximum date range that may be set with the <b>open_date_from</b> and/or <b>open_date_to</b> filters is 90 days. These date filters use the ISO-8601 24-hour date and time format, and the time zone used is Universal Coordinated Time (UTC), also known as Greenwich Mean Time (GMT), or Zulu.<br><br>The <b>open_date_to</b> field sets the ending date of the date range, and can be set up to 90 days from the date set in the <b>open_date_from</b> field. <br><br>The ISO-8601 format looks like this: <em>yyyy-MM-ddThh:mm.ss.sssZ</em>. An example would be <code>2019-08-04T19:09:02.768Z</code>. (optional)
+    payment_dispute_status = 'payment_dispute_status_example' # str | This filter is used if the seller wishes to only retrieve payment disputes in one or more specific states. To filter by more than one status value, a separate <b>payment_dispute_status</b> filter must be used for each value, as shown below:<br><br><i>https://apiz.ebay.com/sell/fulfillment/v1/payment_dispute_summary?payment_dispute_status=OPEN&payment_dispute_status=ACTION_NEEDED</i> <br><br>If no <b>payment_dispute_status</b> filter is used, payment disputes in all states are returned in the response.<br><br>See <a href=\"/api-docs/sell/fulfillment/types/api:DisputeStateEnum\" target=\"_blank \">DisputeStatusEnum</a> type for supported values. (optional)
+    limit = 'limit_example' # str | The value passed in this query parameter sets the maximum number of payment disputes to return per page of data. The value passed in this field should be an integer from 1 to 200. If this query parameter is not set, up to 200 records will be returned on each page of results.<br><br><b>Min</b>: 1<br><br> <b>Max</b>: 200<br><br><b>Default</b>: 200 (optional)
+    offset = 'offset_example' # str | This field is used to specify the number of records to skip in the result set before returning the first payment dispute in the paginated response. A zero-based index is used, so if you set the <b>offset</b> value to <code>0</code> (default value), the first payment dispute in the result set appears at the top of the response. <br><br>Combine <b>offset</b> with the <b>limit</b> parameter to control the payment disputes returned in the response. For example, if you supply an <b>offset</b> value of <code>0</code> and a <b>limit</b> value of <code>10</code>, the response will contain the first 10 payment disputes from the result set that matches the input criteria. If you supply an <b>offset</b> value of <code>10</code> and a <b>limit</b> value of <code>20</code>, the response will contain payment disputes 11-30 from the result set that matches the input criteria.<br><br><b>Min</b>: 0 <br><br><b>Default</b>: 0 (optional)
+
+    try:
+        # Search Payment Dispute by Filters
+        api_response = api_instance.get_payment_dispute_summaries(order_id=order_id, buyer_username=buyer_username, open_date_from=open_date_from, open_date_to=open_date_to, payment_dispute_status=payment_dispute_status, limit=limit, offset=offset)
+        print("The response of PaymentDisputeApi->get_payment_dispute_summaries:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentDisputeApi->get_payment_dispute_summaries: %s\n" % e)
 ```
 
+
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -402,47 +577,71 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**500** | Internal Server Error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_evidence**
-> update_evidence(content_type, payment_dispute_id, body=body)
+> update_evidence(payment_dispute_id, content_type, update_evidence_payment_dispute_request=update_evidence_payment_dispute_request)
 
 Update evidence
 
-This method is used by the seller to update an existing evidence set for a payment dispute with one or more evidence files. The unique identifier of the payment dispute is passed in as a path parameter, and unique identifiers for payment disputes can be retrieved with the <strong>getPaymentDisputeSummaries</strong> method.<br><br><span class=\"tablenote\"><strong>Note:</strong> All evidence files should be uploaded using <strong>addEvidence</strong> and <strong>updateEvidence</strong>  before the seller decides to contest the payment dispute. Once the seller has officially contested the dispute (using <strong>contestPaymentDispute</strong> or through My eBay), the <strong>addEvidence</strong> and <strong>updateEvidence</strong> methods can no longer be used. In the <strong>evidenceRequests</strong> array of the <strong>getPaymentDispute</strong> response, eBay prompts the seller with the type of evidence file(s) that will be needed to contest the payment dispute.</span><br><br>The unique identifier of the evidence set to update is specified through the <strong>evidenceId</strong> field, and the file(s) to add are identified through the <strong>files</strong> array in the request payload. The unique identifier for an evidence file is automatically generated and returned in the <strong>fileId</strong> field of the <strong>uploadEvidence</strong> response payload upon a successful call. Sellers must make sure to capture the <strong>fileId</strong> value for each evidence file that is uploaded with the <strong>uploadEvidence</strong> method.<br><br>The type of evidence being added should be specified in the <strong>evidenceType</strong> field.  All files being added (if more than one) should correspond to this evidence type.<br><br>Upon a successful call, an http status code of <code>204 Success</code> is returned. There is no response payload unless an error occurs. To verify that a new file is a part of the evidence set, the seller can use the <strong>fetchEvidenceContent</strong> method, passing in the proper <strong>evidenceId</strong> and <strong>fileId</strong> values.
+This method is used by the seller to update an existing evidence set for a payment dispute with one or more evidence files. The unique identifier of the payment dispute is passed in as a path parameter, and unique identifiers for payment disputes can be retrieved with the <strong>getPaymentDisputeSummaries</strong> method.<br><br><span class="tablenote"><strong>Note:</strong> All evidence files should be uploaded using <strong>addEvidence</strong> and <strong>updateEvidence</strong>  before the seller decides to contest the payment dispute. Once the seller has officially contested the dispute (using <strong>contestPaymentDispute</strong> or through My eBay), the <strong>addEvidence</strong> and <strong>updateEvidence</strong> methods can no longer be used. In the <strong>evidenceRequests</strong> array of the <strong>getPaymentDispute</strong> response, eBay prompts the seller with the type of evidence file(s) that will be needed to contest the payment dispute.</span><br><br>The unique identifier of the evidence set to update is specified through the <strong>evidenceId</strong> field, and the file(s) to add are identified through the <strong>files</strong> array in the request payload. The unique identifier for an evidence file is automatically generated and returned in the <strong>fileId</strong> field of the <strong>uploadEvidence</strong> response payload upon a successful call. Sellers must make sure to capture the <strong>fileId</strong> value for each evidence file that is uploaded with the <strong>uploadEvidence</strong> method.<br><br>The type of evidence being added should be specified in the <strong>evidenceType</strong> field.  All files being added (if more than one) should correspond to this evidence type.<br><br>Upon a successful call, an http status code of <code>204 Success</code> is returned. There is no response payload unless an error occurs. To verify that a new file is a part of the evidence set, the seller can use the <strong>fetchEvidenceContent</strong> method, passing in the proper <strong>evidenceId</strong> and <strong>fileId</strong> values.
 
 ### Example
+
+* OAuth Authentication (api_auth):
+
 ```python
-from __future__ import print_function
-import time
 import ebayfulfillment
+from ebayfulfillment.models.update_evidence_payment_dispute_request import UpdateEvidencePaymentDisputeRequest
 from ebayfulfillment.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: api_auth
-configuration = ebayfulfillment.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.ebay.com/sell/fulfillment/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ebayfulfillment.Configuration(
+    host = "https://api.ebay.com/sell/fulfillment/v1"
+)
 
-# create an instance of the API class
-api_instance = ebayfulfillment.PaymentDisputeApi(ebayfulfillment.ApiClient(configuration))
-content_type = 'content_type_example' # str | This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.
-payment_dispute_id = 'payment_dispute_id_example' # str | This parameter is used to specify the unique identifier of the contested payment dispute for which the user plans to update the evidence set.<br><br> Use the <a href=\"/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDisputeSummaries\" target=\"_blank \">getPaymentDisputeSummaries</a> method to retrieve payment dispute IDs.
-body = ebayfulfillment.UpdateEvidencePaymentDisputeRequest() # UpdateEvidencePaymentDisputeRequest |  (optional)
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Update evidence
-    api_instance.update_evidence(content_type, payment_dispute_id, body=body)
-except ApiException as e:
-    print("Exception when calling PaymentDisputeApi->update_evidence: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with ebayfulfillment.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ebayfulfillment.PaymentDisputeApi(api_client)
+    payment_dispute_id = 'payment_dispute_id_example' # str | This parameter is used to specify the unique identifier of the contested payment dispute for which the user plans to update the evidence set.<br><br> Use the <a href=\"/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDisputeSummaries\" target=\"_blank \">getPaymentDisputeSummaries</a> method to retrieve payment dispute IDs.
+    content_type = 'content_type_example' # str | This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.
+    update_evidence_payment_dispute_request = ebayfulfillment.UpdateEvidencePaymentDisputeRequest() # UpdateEvidencePaymentDisputeRequest |  (optional)
+
+    try:
+        # Update evidence
+        api_instance.update_evidence(payment_dispute_id, content_type, update_evidence_payment_dispute_request=update_evidence_payment_dispute_request)
+    except Exception as e:
+        print("Exception when calling PaymentDisputeApi->update_evidence: %s\n" % e)
 ```
+
+
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **content_type** | **str**| This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;application/json&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. | 
  **payment_dispute_id** | **str**| This parameter is used to specify the unique identifier of the contested payment dispute for which the user plans to update the evidence set.&lt;br&gt;&lt;br&gt; Use the &lt;a href&#x3D;\&quot;/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDisputeSummaries\&quot; target&#x3D;\&quot;_blank \&quot;&gt;getPaymentDisputeSummaries&lt;/a&gt; method to retrieve payment dispute IDs. | 
- **body** | [**UpdateEvidencePaymentDisputeRequest**](UpdateEvidencePaymentDisputeRequest.md)|  | [optional] 
+ **content_type** | **str**| This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;application/json&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. | 
+ **update_evidence_payment_dispute_request** | [**UpdateEvidencePaymentDisputeRequest**](UpdateEvidencePaymentDisputeRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -457,6 +656,16 @@ void (empty response body)
  - **Content-Type**: application/json
  - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Success |  -  |
+**400** | Bad Request |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
+**500** | Internal Server Error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **upload_evidence_file**
@@ -464,34 +673,51 @@ void (empty response body)
 
 Upload an Evidence File
 
-This method is used to upload an evidence file for a contested payment dispute. The unique identifier of the payment dispute is passed in as a path parameter, and unique identifiers for payment disputes can be retrieved with the <strong>getPaymentDisputeSummaries</strong> method.<br><br><span class=\"tablenote\"><strong>Note:</strong> The <strong>uploadEvidenceFile</strong> only uploads an encrypted, binary image file (using <strong>multipart/form-data</strong> HTTP request header), and does not have a JSON-based request payload.<br><br>Use 'file' as the name of the key that you use to upload the image file. The upload will not be successful if a different key name is used.<br><br>The three image formats supported at this time are <strong>.JPEG</strong>, <strong>.JPG</strong>, and <strong>.PNG</strong>.</span><br><br>After the file is successfully uploaded, the seller will need to grab the <strong>fileId</strong> value in the response payload to add this file to a new evidence set using the <strong>addEvidence</strong> method, or to add this file to an existing evidence set using the <strong>updateEvidence</strong> method.
+This method is used to upload an evidence file for a contested payment dispute. The unique identifier of the payment dispute is passed in as a path parameter, and unique identifiers for payment disputes can be retrieved with the <strong>getPaymentDisputeSummaries</strong> method.<br><br><span class="tablenote"><strong>Note:</strong> The <strong>uploadEvidenceFile</strong> only uploads an encrypted, binary image file (using <strong>multipart/form-data</strong> HTTP request header), and does not have a JSON-based request payload.<br><br>Use 'file' as the name of the key that you use to upload the image file. The upload will not be successful if a different key name is used.<br><br>The three image formats supported at this time are <strong>.JPEG</strong>, <strong>.JPG</strong>, and <strong>.PNG</strong>.</span><br><br>After the file is successfully uploaded, the seller will need to grab the <strong>fileId</strong> value in the response payload to add this file to a new evidence set using the <strong>addEvidence</strong> method, or to add this file to an existing evidence set using the <strong>updateEvidence</strong> method.
 
 ### Example
+
+* OAuth Authentication (api_auth):
+
 ```python
-from __future__ import print_function
-import time
 import ebayfulfillment
+from ebayfulfillment.models.file_evidence import FileEvidence
 from ebayfulfillment.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: api_auth
-configuration = ebayfulfillment.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.ebay.com/sell/fulfillment/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ebayfulfillment.Configuration(
+    host = "https://api.ebay.com/sell/fulfillment/v1"
+)
 
-# create an instance of the API class
-api_instance = ebayfulfillment.PaymentDisputeApi(ebayfulfillment.ApiClient(configuration))
-payment_dispute_id = 'payment_dispute_id_example' # str | This parameter is used to specify the unique identifier of the contested payment dispute for which the user intends to upload an evidence file.<br><br> Use the <a href=\"/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDisputeSummaries\" target=\"_blank \">getPaymentDisputeSummaries</a> method to retrieve payment dispute IDs.
-content_type = 'content_type_example' # str | This header indicates the format of the request body provided by the client. Its value should be set to <b>multipart/form-data</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Upload an Evidence File
-    api_response = api_instance.upload_evidence_file(payment_dispute_id, content_type)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling PaymentDisputeApi->upload_evidence_file: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with ebayfulfillment.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ebayfulfillment.PaymentDisputeApi(api_client)
+    payment_dispute_id = 'payment_dispute_id_example' # str | This parameter is used to specify the unique identifier of the contested payment dispute for which the user intends to upload an evidence file.<br><br> Use the <a href=\"/api-docs/sell/fulfillment/resources/payment_dispute/methods/getPaymentDisputeSummaries\" target=\"_blank \">getPaymentDisputeSummaries</a> method to retrieve payment dispute IDs.
+    content_type = 'content_type_example' # str | This header indicates the format of the request body provided by the client. Its value should be set to <b>multipart/form-data</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.
+
+    try:
+        # Upload an Evidence File
+        api_response = api_instance.upload_evidence_file(payment_dispute_id, content_type)
+        print("The response of PaymentDisputeApi->upload_evidence_file:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentDisputeApi->upload_evidence_file: %s\n" % e)
 ```
 
+
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -510,6 +736,16 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

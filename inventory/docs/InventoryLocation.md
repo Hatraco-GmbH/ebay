@@ -1,19 +1,40 @@
 # InventoryLocation
 
+This type is used by the <strong>updateInventoryLocation</strong> call to update operating hours, special hours, phone number, and other minor details of an inventory location.
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **location** | [**LocationDetails**](LocationDetails.md) |  | [optional] 
 **location_additional_information** | **str** | This text field is used by the merchant to provide/update additional information about an inventory location. Whatever text is passed in this field will replace the current text string defined for this field. If the text will not change, the same text should be passed in once again. &lt;br&gt;&lt;br&gt;&lt;b&gt;Max length&lt;/b&gt;: 256 | [optional] 
-**location_instructions** | **str** | This text field is generally used by the merchant to provide/update special pickup instructions for a store inventory location. Although this field is optional, it is recommended that merchants provide this field to create a pleasant and easy pickup experience for In-Store Pickup and Click and Collect orders. If this field is not included in the call request payload, eBay will use the default pickup instructions contained in the merchant&#x27;s profile (if available). Whatever text is passed in this field will replace the current text string defined for this field. If the text will not change, the same text should be passed in once again. &lt;br&gt;&lt;br&gt;&lt;b&gt;Max length&lt;/b&gt;: 1000 | [optional] 
-**location_types** | **list[str]** | This container is used to update the location type(s) associated with an inventory location. | [optional] 
+**location_instructions** | **str** | This text field is generally used by the merchant to provide/update special pickup instructions for a store inventory location. Although this field is optional, it is recommended that merchants provide this field to create a pleasant and easy pickup experience for In-Store Pickup and Click and Collect orders. If this field is not included in the call request payload, eBay will use the default pickup instructions contained in the merchant&#39;s profile (if available). Whatever text is passed in this field will replace the current text string defined for this field. If the text will not change, the same text should be passed in once again. &lt;br&gt;&lt;br&gt;&lt;b&gt;Max length&lt;/b&gt;: 1000 | [optional] 
+**location_types** | **List[str]** | This container is used to update the location type(s) associated with an inventory location. | [optional] 
 **location_web_url** | **str** | This text field is used by the merchant to provide/update the Website address (URL) associated with the inventory location. The URL that is passed in this field will replace any other URL that may be defined for this field. &lt;br&gt;&lt;br&gt;&lt;b&gt;Max length&lt;/b&gt;: 512 | [optional] 
 **name** | **str** | This text field is used by the merchant to update the name of the inventory location. This name should be a human-friendly name as it will be in In-Store Pickup and Click and Collect listings. A name is not required for warehouse locations. For store locations, this field is not immediately required, but will be required before an offer enabled with the In-Store Pickup or Click and Collect capability can be published. So, if the seller omitted this field in the &lt;strong&gt;createInventoryLocation&lt;/strong&gt; call, it is required for an &lt;strong&gt;updateInventoryLocation&lt;/strong&gt; call. The name that is passed in this field will replace any other name that may be defined for this field. | [optional] 
-**operating_hours** | [**list[OperatingHours]**](OperatingHours.md) | This container is used to provide/update the regular operating hours for a store location during the days of the week. A &lt;strong&gt;dayOfWeekEnum&lt;/strong&gt; field and an &lt;strong&gt;intervals&lt;/strong&gt; container will be needed for each day of the week that the location is open. Note that if operating hours are already set for a location for a specific day of the week, whatever is set through an &lt;strong&gt;updateInventoryLocation&lt;/strong&gt; call will override those existing hours. | [optional] 
+**operating_hours** | [**List[OperatingHours]**](OperatingHours.md) | This container is used to provide/update the regular operating hours for a store location during the days of the week. A &lt;strong&gt;dayOfWeekEnum&lt;/strong&gt; field and an &lt;strong&gt;intervals&lt;/strong&gt; container will be needed for each day of the week that the location is open. Note that if operating hours are already set for a location for a specific day of the week, whatever is set through an &lt;strong&gt;updateInventoryLocation&lt;/strong&gt; call will override those existing hours. | [optional] 
 **phone** | **str** | This text field is used by the merchant to provide/update the phone number for the inventory location. The phone number that is passed in this field will replace any other phone number that may be defined for this field. &lt;br&gt;&lt;br&gt;&lt;b&gt;Max length&lt;/b&gt;: 36 | [optional] 
-**special_hours** | [**list[SpecialHours]**](SpecialHours.md) | This container is used to provide/update the special operating hours for a store location on a specific date, such as a holiday. The special hours specified for the specific date will override the normal operating hours for that particular day of the week. If special hours have already been set up for an inventory location, specifying special hours through an &lt;strong&gt;updateInventoryLocation&lt;/strong&gt; call will only add to the list, unless the date(s) used are the same special date(s) already set up, in which case, the special hours set up through the &lt;strong&gt;updateInventoryLocation&lt;/strong&gt; call will override the existing special hours. | [optional] 
+**special_hours** | [**List[SpecialHours]**](SpecialHours.md) | This container is used to provide/update the special operating hours for a store location on a specific date, such as a holiday. The special hours specified for the specific date will override the normal operating hours for that particular day of the week. If special hours have already been set up for an inventory location, specifying special hours through an &lt;strong&gt;updateInventoryLocation&lt;/strong&gt; call will only add to the list, unless the date(s) used are the same special date(s) already set up, in which case, the special hours set up through the &lt;strong&gt;updateInventoryLocation&lt;/strong&gt; call will override the existing special hours. | [optional] 
 **time_zone_id** | **str** | This field is used to provide/update the time zone of the inventory location being created. This value should be in Olson format (for example &lt;code&gt;America/Vancouver&lt;/code&gt;). For supported values, see &lt;a href&#x3D;\&quot;https://howtodoinjava.com/java/date-time/supported-zone-ids-offsets/#3-java-supported-zone-ids-and-offsets\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Java Supported Zone Ids and Offsets&lt;/a&gt;.&lt;br&gt;&lt;br&gt;&lt;span class&#x3D;\&quot;tablenote\&quot;&gt;&lt;b&gt;Note:&lt;/b&gt; If specified, this time zone will be used for all hour related fields. If this field is not specified, the time zone will be calculated from the provided address fields.&lt;/span&gt; | [optional] 
 **fulfillment_center_specifications** | [**FulfillmentCenterSpecifications**](FulfillmentCenterSpecifications.md) |  | [optional] 
 
+## Example
+
+```python
+from ebayinventory.models.inventory_location import InventoryLocation
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of InventoryLocation from a JSON string
+inventory_location_instance = InventoryLocation.from_json(json)
+# print the JSON string representation of the object
+print(InventoryLocation.to_json())
+
+# convert the object into a dict
+inventory_location_dict = inventory_location_instance.to_dict()
+# create an instance of InventoryLocation from a dict
+inventory_location_from_dict = InventoryLocation.from_dict(inventory_location_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
 

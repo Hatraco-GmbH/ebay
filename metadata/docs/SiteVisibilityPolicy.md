@@ -1,6 +1,9 @@
 # SiteVisibilityPolicy
 
+A type that contains eBay international cross border trade policy metadata fields.
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **category_id** | **str** | The unique identifier of the eBay leaf category for which metadata is being returned. | [optional] 
@@ -9,5 +12,23 @@ Name | Type | Description | Notes
 **cross_border_trade_gb_enabled** | **bool** | If &lt;code&gt;true&lt;/code&gt;, the category supports specifying that listings of a seller on the US or Canada merketplaces can pass in UK as a value in a &lt;CrossBorderTrade&gt; field to expose that item on the eBay UK (ebay.co.uk) and eBay IE (ebay.ie) sites. For more information, see &lt;a href&#x3D;\&quot;/api-docs/user-guides/static/trading-user-guide/cross-border-trading.html\&quot;  target&#x3D;\&quot;_blank\&quot;&gt;Cross-border trading&lt;/a&gt;. | [optional] 
 **cross_border_trade_north_america_enabled** | **bool** | If &lt;code&gt;true&lt;/code&gt;, the category supports specifying that listings of a seller on the US or Canada merketplaces can pass in North America as a value in a &lt;CrossBorderTrade&gt; field to expose that item on the eBay US (ebay.com) and eBay Canada (ebay.ca) sites (English). For more information, see &lt;a href&#x3D;\&quot;/api-docs/user-guides/static/trading-user-guide/cross-border-trading.html\&quot;  target&#x3D;\&quot;_blank\&quot;&gt;Cross-border trading&lt;/a&gt;.  | [optional] 
 
+## Example
+
+```python
+from ebaymetadata.models.site_visibility_policy import SiteVisibilityPolicy
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of SiteVisibilityPolicy from a JSON string
+site_visibility_policy_instance = SiteVisibilityPolicy.from_json(json)
+# print the JSON string representation of the object
+print(SiteVisibilityPolicy.to_json())
+
+# convert the object into a dict
+site_visibility_policy_dict = site_visibility_policy_instance.to_dict()
+# create an instance of SiteVisibilityPolicy from a dict
+site_visibility_policy_from_dict = SiteVisibilityPolicy.from_dict(site_visibility_policy_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
 

@@ -1,42 +1,61 @@
 # ebaymetadata.CountryApi
 
-All URIs are relative to *https://api.ebay.com{basePath}*
+All URIs are relative to *https://api.ebay.com/sell/metadata/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_sales_tax_jurisdictions**](CountryApi.md#get_sales_tax_jurisdictions) | **GET** /country/{countryCode}/sales_tax_jurisdiction | 
 
+
 # **get_sales_tax_jurisdictions**
 > SalesTaxJurisdictions get_sales_tax_jurisdictions(country_code)
 
-
-
-This method retrieves all sales-tax jurisdictions for the country specified in the <b>countryCode</b> path parameter. Countries with valid sales-tax jurisdictions are Canada and the US.<br><br>The response from this call tells you the jurisdictions for which a seller can configure tax tables. Although setting up tax tables is optional, you can use the <b>createOrReplaceSalesTax</b> method in the <b>Account API</b> call to configure the tax tables for the jurisdictions into which you sell.<br><br><span class=\"tablenote\"><b>Note:</b> Sales-tax tables are only available for the US (EBAY_US) and Canada (EBAY_CA) marketplaces.</span><br><br><div class=\"msgbox_important\"><p class=\"msgbox_importantInDiv\" data-mc-autonum=\"&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;\"><span class=\"autonumber\"><span><b><span style=\"color: #dd1e31;\" class=\"mcFormatColor\">Important!</span></b></span></span> In the US, eBay now calculates, collects, and remits sales tax to the proper taxing authorities in all 50 states and Washington, DC. Sellers can no longer specify sales-tax rates for these jurisdictions using a tax table.<br><br>However, sellers may continue to use a sales-tax table to set rates for the following US territories:<ul><li>American Samoa (AS)</li><li>Guam (GU)</li><li>Northern Mariana Islands (MP)</li><li>Palau (PW)</li><li>US Virgin Islands (VI)</li></ul>For additional information, refer to <a href=\"https://www.ebay.com/help/selling/fees-credits-invoices/taxes-import-charges?id=4121 \" target=\"_blank\">Taxes and import charges</a>.</p></div>
+This method retrieves all sales-tax jurisdictions for the country specified in the <b>countryCode</b> path parameter. Countries with valid sales-tax jurisdictions are Canada and the US.<br><br>The response from this call tells you the jurisdictions for which a seller can configure tax tables. Although setting up tax tables is optional, you can use the <b>createOrReplaceSalesTax</b> method in the <b>Account API</b> call to configure the tax tables for the jurisdictions into which you sell.<br><br><span class="tablenote"><b>Note:</b> Sales-tax tables are only available for the US (EBAY_US) and Canada (EBAY_CA) marketplaces.</span><br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> In the US, eBay now calculates, collects, and remits sales tax to the proper taxing authorities in all 50 states and Washington, DC. Sellers can no longer specify sales-tax rates for these jurisdictions using a tax table.<br><br>However, sellers may continue to use a sales-tax table to set rates for the following US territories:<ul><li>American Samoa (AS)</li><li>Guam (GU)</li><li>Northern Mariana Islands (MP)</li><li>Palau (PW)</li><li>US Virgin Islands (VI)</li></ul>For additional information, refer to <a href="https://www.ebay.com/help/selling/fees-credits-invoices/taxes-import-charges?id=4121 " target="_blank">Taxes and import charges</a>.</p></div>
 
 ### Example
+
+* OAuth Authentication (api_auth):
+* OAuth Authentication (api_auth):
+
 ```python
-from __future__ import print_function
-import time
 import ebaymetadata
+from ebaymetadata.models.sales_tax_jurisdictions import SalesTaxJurisdictions
 from ebaymetadata.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: api_auth
-configuration = ebaymetadata.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.ebay.com/sell/metadata/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ebaymetadata.Configuration(
+    host = "https://api.ebay.com/sell/metadata/v1"
+)
 
-# create an instance of the API class
-api_instance = ebaymetadata.CountryApi(ebaymetadata.ApiClient(configuration))
-country_code = 'country_code_example' # str | This path parameter specifies the two-letter <a href=\"https://www.iso.org/iso-3166-country-codes.html \" title=\"https://www.iso.org \" target=\"_blank\">ISO 3166</a> country code for the country whose jurisdictions you want to retrieve.<br><br><span class=\"tablenote\"><b>Note:</b> Sales-tax tables are available only for the US and Canada marketplaces. Therefore, the only supported values are:<ul><li><code>US</code></li><li><code>CA</code></li></ul></span>
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    api_response = api_instance.get_sales_tax_jurisdictions(country_code)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CountryApi->get_sales_tax_jurisdictions: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with ebaymetadata.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ebaymetadata.CountryApi(api_client)
+    country_code = 'country_code_example' # str | This path parameter specifies the two-letter <a href=\"https://www.iso.org/iso-3166-country-codes.html \" title=\"https://www.iso.org \" target=\"_blank\">ISO 3166</a> country code for the country whose jurisdictions you want to retrieve.<br><br><span class=\"tablenote\"><b>Note:</b> Sales-tax tables are available only for the US and Canada marketplaces. Therefore, the only supported values are:<ul><li><code>US</code></li><li><code>CA</code></li></ul></span>
+
+    try:
+        api_response = api_instance.get_sales_tax_jurisdictions(country_code)
+        print("The response of CountryApi->get_sales_tax_jurisdictions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CountryApi->get_sales_tax_jurisdictions: %s\n" % e)
 ```
 
+
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -48,12 +67,21 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_auth](../README.md#api_auth)
+[api_auth](../README.md#api_auth), [api_auth](../README.md#api_auth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
