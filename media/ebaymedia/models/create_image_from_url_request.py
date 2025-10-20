@@ -22,13 +22,12 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ErrorParameter(BaseModel):
+class CreateImageFromUrlRequest(BaseModel):
     """
-    ErrorParameter
+    A type that provides the location of the image.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The object of the error.")
-    value: Optional[StrictStr] = Field(default=None, description="The value of the object.")
-    __properties: ClassVar[List[str]] = ["name", "value"]
+    image_url: Optional[StrictStr] = Field(default=None, description="The image URL of the self-hosted picture to upload to eBay Picture Services (EPS). In addition to the picture requirements in <a href=\"https://www.ebay.com/help/policies/listing-policies/picture-policy?id=4370\" target=\"_blank\">Picture policy</a>, the provided URL must be secured using HTTPS (HTTP is not permitted). For more information, see <a href=\"/api-docs/sell/static/inventory/managing-image-media.html#image-requirements\" target=\"_blank\">Image requirements</a>.", alias="imageUrl")
+    __properties: ClassVar[List[str]] = ["imageUrl"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +47,7 @@ class ErrorParameter(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ErrorParameter from a JSON string"""
+        """Create an instance of CreateImageFromUrlRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +72,7 @@ class ErrorParameter(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ErrorParameter from a dict"""
+        """Create an instance of CreateImageFromUrlRequest from a dict"""
         if obj is None:
             return None
 
@@ -81,8 +80,7 @@ class ErrorParameter(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "name": obj.get("name"),
-            "value": obj.get("value")
+            "imageUrl": obj.get("imageUrl")
         })
         return _obj
 

@@ -22,13 +22,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ErrorParameter(BaseModel):
+class ImageResponse(BaseModel):
     """
-    ErrorParameter
+    A type that provides an image's details including its URL and expiration.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The object of the error.")
-    value: Optional[StrictStr] = Field(default=None, description="The value of the object.")
-    __properties: ClassVar[List[str]] = ["name", "value"]
+    expiration_date: Optional[StrictStr] = Field(default=None, description="The date and time when an unused EPS image will expire and be removed from the EPS server, in Coordinated Universal Time (UTC). As long as an EPS image is being used in an active listing, that image will remain on the EPS server and be accessible.", alias="expirationDate")
+    image_url: Optional[StrictStr] = Field(default=None, description="The EPS URL to access the uploaded image. This URL will be used in listing calls to add the image to a listing.", alias="imageUrl")
+    __properties: ClassVar[List[str]] = ["expirationDate", "imageUrl"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +48,7 @@ class ErrorParameter(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ErrorParameter from a JSON string"""
+        """Create an instance of ImageResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +73,7 @@ class ErrorParameter(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ErrorParameter from a dict"""
+        """Create an instance of ImageResponse from a dict"""
         if obj is None:
             return None
 
@@ -81,8 +81,8 @@ class ErrorParameter(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "name": obj.get("name"),
-            "value": obj.get("value")
+            "expirationDate": obj.get("expirationDate"),
+            "imageUrl": obj.get("imageUrl")
         })
         return _obj
 

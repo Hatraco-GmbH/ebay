@@ -14,10 +14,10 @@
 
 import unittest
 
-from ebaymedia.models.error_parameter import ErrorParameter
+from ebaymedia.models.image_response import ImageResponse
 
-class TestErrorParameter(unittest.TestCase):
-    """ErrorParameter unit test stubs"""
+class TestImageResponse(unittest.TestCase):
+    """ImageResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,26 +25,26 @@ class TestErrorParameter(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> ErrorParameter:
-        """Test ErrorParameter
+    def make_instance(self, include_optional) -> ImageResponse:
+        """Test ImageResponse
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `ErrorParameter`
+        # uncomment below to create an instance of `ImageResponse`
         """
-        model = ErrorParameter()
+        model = ImageResponse()
         if include_optional:
-            return ErrorParameter(
-                name = '',
-                value = ''
+            return ImageResponse(
+                expiration_date = '',
+                image_url = ''
             )
         else:
-            return ErrorParameter(
+            return ImageResponse(
         )
         """
 
-    def testErrorParameter(self):
-        """Test ErrorParameter"""
+    def testImageResponse(self):
+        """Test ImageResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

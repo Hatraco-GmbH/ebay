@@ -22,13 +22,14 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ErrorParameter(BaseModel):
+class CreateDocumentFromUrlRequest(BaseModel):
     """
-    ErrorParameter
+    This type contains the metadata used to create the document ID when creating a document using a URL.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The object of the error.")
-    value: Optional[StrictStr] = Field(default=None, description="The value of the object.")
-    __properties: ClassVar[List[str]] = ["name", "value"]
+    document_type: Optional[StrictStr] = Field(default=None, description="The type of the document being created. For example, a <code>USER_GUIDE_OR_MANUAL</code> or a <code>SAFETY_DATA_SHEET</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/media/types/api:DocumentTypeEnum'>eBay API documentation</a>", alias="documentType")
+    document_url: Optional[StrictStr] = Field(default=None, description="The URL of the document being created.<br><br>The document referenced by the URL must be a .pdf, .png, .jpg, or .jpeg file, and must be no larger than 10 MB.", alias="documentUrl")
+    languages: Optional[List[StrictStr]] = Field(default=None, description="This array shows the language(s) used in the document.")
+    __properties: ClassVar[List[str]] = ["documentType", "documentUrl", "languages"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +49,7 @@ class ErrorParameter(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ErrorParameter from a JSON string"""
+        """Create an instance of CreateDocumentFromUrlRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +74,7 @@ class ErrorParameter(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ErrorParameter from a dict"""
+        """Create an instance of CreateDocumentFromUrlRequest from a dict"""
         if obj is None:
             return None
 
@@ -81,8 +82,9 @@ class ErrorParameter(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "name": obj.get("name"),
-            "value": obj.get("value")
+            "documentType": obj.get("documentType"),
+            "documentUrl": obj.get("documentUrl"),
+            "languages": obj.get("languages")
         })
         return _obj
 

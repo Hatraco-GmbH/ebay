@@ -14,32 +14,32 @@
 
 import unittest
 
-from ebaymedia.api.video_api import VideoApi
+from ebaymedia.api.image_api import ImageApi
 
 
-class TestVideoApi(unittest.TestCase):
-    """VideoApi unit test stubs"""
+class TestImageApi(unittest.TestCase):
+    """ImageApi unit test stubs"""
 
     def setUp(self) -> None:
-        self.api = VideoApi()
+        self.api = ImageApi()
 
     def tearDown(self) -> None:
         pass
 
-    def test_create_video(self) -> None:
-        """Test case for create_video
+    def test_create_image_from_file(self) -> None:
+        """Test case for create_image_from_file
 
         """
         pass
 
-    def test_get_video(self) -> None:
-        """Test case for get_video
+    def test_create_image_from_url(self) -> None:
+        """Test case for create_image_from_url
 
         """
         pass
 
-    def test_upload_video(self) -> None:
-        """Test case for upload_video
+    def test_get_image(self) -> None:
+        """Test case for get_image
 
         """
         pass
