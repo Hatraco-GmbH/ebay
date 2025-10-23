@@ -19,7 +19,9 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
-from ebaymedia.models.create_document_from_url_request import CreateDocumentFromUrlRequest
+from ebaymedia.models.create_document_from_url_request import (
+    CreateDocumentFromUrlRequest,
+)
 from ebaymedia.models.create_document_request import CreateDocumentRequest
 from ebaymedia.models.create_document_response import CreateDocumentResponse
 from ebaymedia.models.document_response import DocumentResponse
@@ -41,19 +43,22 @@ class DocumentApi:
             api_client = ApiClient.get_default()
         self.api_client = api_client
 
-
     @validate_call
     def create_document(
         self,
-        content_type: Annotated[StrictStr, Field(description="This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.")],
+        content_type: Annotated[
+            StrictStr,
+            Field(
+                description='This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href="/api-docs/static/rest-request-components.html#HTTP" target="_blank ">HTTP request headers</a>.'
+            ),
+        ],
         create_document_request: Optional[CreateDocumentRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -62,7 +67,7 @@ class DocumentApi:
     ) -> CreateDocumentResponse:
         """create_document
 
-        This method stages a document to be uploaded, and requires the type of document to be uploaded, and the language(s) that the document contains. A successful call returns a <b>documentId</b> value that is then used as a path parameter in an <a href=\" /api-docs/commerce/media/resources/document/methods/uploadDocument\" >uploadDocument</a> call.<p>When a document is successfully created, the method returns the HTTP Status Code <code>201 Created.</code> The method returns <b>documentId</b> in the response payload, which you can use to retrieve the document resource. This ID is also returned in the <b>location</b> header, for convenience.</p><div class=\"msgbox_important\"><p class=\"msgbox_importantInDiv\" data-mc-autonum=\"&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;\"><span class=\"autonumber\"><span><b><span style=\"color: #dd1e31;\" class=\"mcFormatColor\">Important!</span></b></span></span> Make sure to capture the document ID value returned in the response payload. This value is required to use the other methods in the <b>document</b> resource, and also needed to associate a document to a listing using the Trading and Inventory APIs.</p></div><br><p>To upload a created document, use the document ID returned from this method's response with the <a href=\" /api-docs/commerce/media/resources/document/methods/uploadDocument\" >uploadDocument</a> method. See <a href=\"/api-docs/sell/static/inventory/managing-document-media.html\" target=\"_blank\">Managing documents</a> for information on creating, uploading, and adding documents to listings.</p><div class=\"msgbox_important\"><p class=\"msgbox_importantInDiv\" data-mc-autonum=\"&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;\"><span class=\"autonumber\"><span><b><span style=\"color: #dd1e31;\" class=\"mcFormatColor\">Important!</span></b></span></span>All POST methods in the Media API, including this method, are subject to short-duration rate limits at the user level: 50 requests per 5 seconds.</p></div> 
+        This method stages a document to be uploaded, and requires the type of document to be uploaded, and the language(s) that the document contains. A successful call returns a <b>documentId</b> value that is then used as a path parameter in an <a href=\" /api-docs/commerce/media/resources/document/methods/uploadDocument\" >uploadDocument</a> call.<p>When a document is successfully created, the method returns the HTTP Status Code <code>201 Created.</code> The method returns <b>documentId</b> in the response payload, which you can use to retrieve the document resource. This ID is also returned in the <b>location</b> header, for convenience.</p><div class=\"msgbox_important\"><p class=\"msgbox_importantInDiv\" data-mc-autonum=\"&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;\"><span class=\"autonumber\"><span><b><span style=\"color: #dd1e31;\" class=\"mcFormatColor\">Important!</span></b></span></span> Make sure to capture the document ID value returned in the response payload. This value is required to use the other methods in the <b>document</b> resource, and also needed to associate a document to a listing using the Trading and Inventory APIs.</p></div><br><p>To upload a created document, use the document ID returned from this method's response with the <a href=\" /api-docs/commerce/media/resources/document/methods/uploadDocument\" >uploadDocument</a> method. See <a href=\"/api-docs/sell/static/inventory/managing-document-media.html\" target=\"_blank\">Managing documents</a> for information on creating, uploading, and adding documents to listings.</p><div class=\"msgbox_important\"><p class=\"msgbox_importantInDiv\" data-mc-autonum=\"&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;\"><span class=\"autonumber\"><span><b><span style=\"color: #dd1e31;\" class=\"mcFormatColor\">Important!</span></b></span></span>All POST methods in the Media API, including this method, are subject to short-duration rate limits at the user level: 50 requests per 5 seconds.</p></div>
 
         :param content_type: This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>. (required)
         :type content_type: str
@@ -88,7 +93,7 @@ class DocumentApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_document_serialize(
             content_type=content_type,
@@ -96,17 +101,16 @@ class DocumentApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "CreateDocumentResponse",
-            '400': None,
-            '500': None,
+            "201": "CreateDocumentResponse",
+            "400": None,
+            "500": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -114,19 +118,22 @@ class DocumentApi:
             response_types_map=_response_types_map,
         ).data
 
-
     @validate_call
     def create_document_with_http_info(
         self,
-        content_type: Annotated[StrictStr, Field(description="This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.")],
+        content_type: Annotated[
+            StrictStr,
+            Field(
+                description='This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href="/api-docs/static/rest-request-components.html#HTTP" target="_blank ">HTTP request headers</a>.'
+            ),
+        ],
         create_document_request: Optional[CreateDocumentRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -135,7 +142,7 @@ class DocumentApi:
     ) -> ApiResponse[CreateDocumentResponse]:
         """create_document
 
-        This method stages a document to be uploaded, and requires the type of document to be uploaded, and the language(s) that the document contains. A successful call returns a <b>documentId</b> value that is then used as a path parameter in an <a href=\" /api-docs/commerce/media/resources/document/methods/uploadDocument\" >uploadDocument</a> call.<p>When a document is successfully created, the method returns the HTTP Status Code <code>201 Created.</code> The method returns <b>documentId</b> in the response payload, which you can use to retrieve the document resource. This ID is also returned in the <b>location</b> header, for convenience.</p><div class=\"msgbox_important\"><p class=\"msgbox_importantInDiv\" data-mc-autonum=\"&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;\"><span class=\"autonumber\"><span><b><span style=\"color: #dd1e31;\" class=\"mcFormatColor\">Important!</span></b></span></span> Make sure to capture the document ID value returned in the response payload. This value is required to use the other methods in the <b>document</b> resource, and also needed to associate a document to a listing using the Trading and Inventory APIs.</p></div><br><p>To upload a created document, use the document ID returned from this method's response with the <a href=\" /api-docs/commerce/media/resources/document/methods/uploadDocument\" >uploadDocument</a> method. See <a href=\"/api-docs/sell/static/inventory/managing-document-media.html\" target=\"_blank\">Managing documents</a> for information on creating, uploading, and adding documents to listings.</p><div class=\"msgbox_important\"><p class=\"msgbox_importantInDiv\" data-mc-autonum=\"&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;\"><span class=\"autonumber\"><span><b><span style=\"color: #dd1e31;\" class=\"mcFormatColor\">Important!</span></b></span></span>All POST methods in the Media API, including this method, are subject to short-duration rate limits at the user level: 50 requests per 5 seconds.</p></div> 
+        This method stages a document to be uploaded, and requires the type of document to be uploaded, and the language(s) that the document contains. A successful call returns a <b>documentId</b> value that is then used as a path parameter in an <a href=\" /api-docs/commerce/media/resources/document/methods/uploadDocument\" >uploadDocument</a> call.<p>When a document is successfully created, the method returns the HTTP Status Code <code>201 Created.</code> The method returns <b>documentId</b> in the response payload, which you can use to retrieve the document resource. This ID is also returned in the <b>location</b> header, for convenience.</p><div class=\"msgbox_important\"><p class=\"msgbox_importantInDiv\" data-mc-autonum=\"&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;\"><span class=\"autonumber\"><span><b><span style=\"color: #dd1e31;\" class=\"mcFormatColor\">Important!</span></b></span></span> Make sure to capture the document ID value returned in the response payload. This value is required to use the other methods in the <b>document</b> resource, and also needed to associate a document to a listing using the Trading and Inventory APIs.</p></div><br><p>To upload a created document, use the document ID returned from this method's response with the <a href=\" /api-docs/commerce/media/resources/document/methods/uploadDocument\" >uploadDocument</a> method. See <a href=\"/api-docs/sell/static/inventory/managing-document-media.html\" target=\"_blank\">Managing documents</a> for information on creating, uploading, and adding documents to listings.</p><div class=\"msgbox_important\"><p class=\"msgbox_importantInDiv\" data-mc-autonum=\"&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;\"><span class=\"autonumber\"><span><b><span style=\"color: #dd1e31;\" class=\"mcFormatColor\">Important!</span></b></span></span>All POST methods in the Media API, including this method, are subject to short-duration rate limits at the user level: 50 requests per 5 seconds.</p></div>
 
         :param content_type: This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>. (required)
         :type content_type: str
@@ -161,7 +168,7 @@ class DocumentApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_document_serialize(
             content_type=content_type,
@@ -169,17 +176,16 @@ class DocumentApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "CreateDocumentResponse",
-            '400': None,
-            '500': None,
+            "201": "CreateDocumentResponse",
+            "400": None,
+            "500": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -187,19 +193,22 @@ class DocumentApi:
             response_types_map=_response_types_map,
         )
 
-
     @validate_call
     def create_document_without_preload_content(
         self,
-        content_type: Annotated[StrictStr, Field(description="This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.")],
+        content_type: Annotated[
+            StrictStr,
+            Field(
+                description='This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href="/api-docs/static/rest-request-components.html#HTTP" target="_blank ">HTTP request headers</a>.'
+            ),
+        ],
         create_document_request: Optional[CreateDocumentRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -208,7 +217,7 @@ class DocumentApi:
     ) -> RESTResponseType:
         """create_document
 
-        This method stages a document to be uploaded, and requires the type of document to be uploaded, and the language(s) that the document contains. A successful call returns a <b>documentId</b> value that is then used as a path parameter in an <a href=\" /api-docs/commerce/media/resources/document/methods/uploadDocument\" >uploadDocument</a> call.<p>When a document is successfully created, the method returns the HTTP Status Code <code>201 Created.</code> The method returns <b>documentId</b> in the response payload, which you can use to retrieve the document resource. This ID is also returned in the <b>location</b> header, for convenience.</p><div class=\"msgbox_important\"><p class=\"msgbox_importantInDiv\" data-mc-autonum=\"&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;\"><span class=\"autonumber\"><span><b><span style=\"color: #dd1e31;\" class=\"mcFormatColor\">Important!</span></b></span></span> Make sure to capture the document ID value returned in the response payload. This value is required to use the other methods in the <b>document</b> resource, and also needed to associate a document to a listing using the Trading and Inventory APIs.</p></div><br><p>To upload a created document, use the document ID returned from this method's response with the <a href=\" /api-docs/commerce/media/resources/document/methods/uploadDocument\" >uploadDocument</a> method. See <a href=\"/api-docs/sell/static/inventory/managing-document-media.html\" target=\"_blank\">Managing documents</a> for information on creating, uploading, and adding documents to listings.</p><div class=\"msgbox_important\"><p class=\"msgbox_importantInDiv\" data-mc-autonum=\"&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;\"><span class=\"autonumber\"><span><b><span style=\"color: #dd1e31;\" class=\"mcFormatColor\">Important!</span></b></span></span>All POST methods in the Media API, including this method, are subject to short-duration rate limits at the user level: 50 requests per 5 seconds.</p></div> 
+        This method stages a document to be uploaded, and requires the type of document to be uploaded, and the language(s) that the document contains. A successful call returns a <b>documentId</b> value that is then used as a path parameter in an <a href=\" /api-docs/commerce/media/resources/document/methods/uploadDocument\" >uploadDocument</a> call.<p>When a document is successfully created, the method returns the HTTP Status Code <code>201 Created.</code> The method returns <b>documentId</b> in the response payload, which you can use to retrieve the document resource. This ID is also returned in the <b>location</b> header, for convenience.</p><div class=\"msgbox_important\"><p class=\"msgbox_importantInDiv\" data-mc-autonum=\"&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;\"><span class=\"autonumber\"><span><b><span style=\"color: #dd1e31;\" class=\"mcFormatColor\">Important!</span></b></span></span> Make sure to capture the document ID value returned in the response payload. This value is required to use the other methods in the <b>document</b> resource, and also needed to associate a document to a listing using the Trading and Inventory APIs.</p></div><br><p>To upload a created document, use the document ID returned from this method's response with the <a href=\" /api-docs/commerce/media/resources/document/methods/uploadDocument\" >uploadDocument</a> method. See <a href=\"/api-docs/sell/static/inventory/managing-document-media.html\" target=\"_blank\">Managing documents</a> for information on creating, uploading, and adding documents to listings.</p><div class=\"msgbox_important\"><p class=\"msgbox_importantInDiv\" data-mc-autonum=\"&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;\"><span class=\"autonumber\"><span><b><span style=\"color: #dd1e31;\" class=\"mcFormatColor\">Important!</span></b></span></span>All POST methods in the Media API, including this method, are subject to short-duration rate limits at the user level: 50 requests per 5 seconds.</p></div>
 
         :param content_type: This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>. (required)
         :type content_type: str
@@ -234,7 +243,7 @@ class DocumentApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_document_serialize(
             content_type=content_type,
@@ -242,20 +251,18 @@ class DocumentApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "CreateDocumentResponse",
-            '400': None,
-            '500': None,
+            "201": "CreateDocumentResponse",
+            "400": None,
+            "500": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         return response_data.response
-
 
     def _create_document_serialize(
         self,
@@ -266,14 +273,10 @@ class DocumentApi:
         _headers,
         _host_index,
     ) -> RequestSerialized:
-
-        _hosts = [
-            'https://api.ebay.com{basePath}'
-        ]
+        _hosts = ["https://api.ebay.com{basePath}"]
         _host = _hosts[_host_index]
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -288,43 +291,34 @@ class DocumentApi:
         # process the query parameters
         # process the header parameters
         if content_type is not None:
-            _header_params['Content-Type'] = content_type
+            _header_params["Content-Type"] = content_type
         # process the form parameters
         # process the body parameter
         if create_document_request is not None:
             _body_params = create_document_request
 
-
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
+        if "Accept" not in _header_params:
+            _header_params["Accept"] = self.api_client.select_header_accept(
+                ["application/json"]
             )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-            'api_auth'
-        ]
+        _auth_settings: List[str] = ["api_auth"]
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/document',
+            method="POST",
+            resource_path="/document",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -334,24 +328,25 @@ class DocumentApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def create_document_from_url(
         self,
-        content_type: Annotated[StrictStr, Field(description="This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.")],
+        content_type: Annotated[
+            StrictStr,
+            Field(
+                description='This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href="/api-docs/static/rest-request-components.html#HTTP" target="_blank ">HTTP request headers</a>.'
+            ),
+        ],
         create_document_from_url_request: Optional[CreateDocumentFromUrlRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -386,7 +381,7 @@ class DocumentApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_document_from_url_serialize(
             content_type=content_type,
@@ -394,17 +389,16 @@ class DocumentApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "CreateDocumentResponse",
-            '400': None,
-            '500': None,
+            "201": "CreateDocumentResponse",
+            "400": None,
+            "500": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -412,19 +406,22 @@ class DocumentApi:
             response_types_map=_response_types_map,
         ).data
 
-
     @validate_call
     def create_document_from_url_with_http_info(
         self,
-        content_type: Annotated[StrictStr, Field(description="This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.")],
+        content_type: Annotated[
+            StrictStr,
+            Field(
+                description='This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href="/api-docs/static/rest-request-components.html#HTTP" target="_blank ">HTTP request headers</a>.'
+            ),
+        ],
         create_document_from_url_request: Optional[CreateDocumentFromUrlRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -459,7 +456,7 @@ class DocumentApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_document_from_url_serialize(
             content_type=content_type,
@@ -467,17 +464,16 @@ class DocumentApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "CreateDocumentResponse",
-            '400': None,
-            '500': None,
+            "201": "CreateDocumentResponse",
+            "400": None,
+            "500": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -485,19 +481,22 @@ class DocumentApi:
             response_types_map=_response_types_map,
         )
 
-
     @validate_call
     def create_document_from_url_without_preload_content(
         self,
-        content_type: Annotated[StrictStr, Field(description="This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.")],
+        content_type: Annotated[
+            StrictStr,
+            Field(
+                description='This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href="/api-docs/static/rest-request-components.html#HTTP" target="_blank ">HTTP request headers</a>.'
+            ),
+        ],
         create_document_from_url_request: Optional[CreateDocumentFromUrlRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -532,7 +531,7 @@ class DocumentApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_document_from_url_serialize(
             content_type=content_type,
@@ -540,20 +539,18 @@ class DocumentApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "CreateDocumentResponse",
-            '400': None,
-            '500': None,
+            "201": "CreateDocumentResponse",
+            "400": None,
+            "500": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         return response_data.response
-
 
     def _create_document_from_url_serialize(
         self,
@@ -564,14 +561,10 @@ class DocumentApi:
         _headers,
         _host_index,
     ) -> RequestSerialized:
-
-        _hosts = [
-            'https://api.ebay.com{basePath}'
-        ]
+        _hosts = ["https://api.ebay.com{basePath}"]
         _host = _hosts[_host_index]
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -586,43 +579,34 @@ class DocumentApi:
         # process the query parameters
         # process the header parameters
         if content_type is not None:
-            _header_params['Content-Type'] = content_type
+            _header_params["Content-Type"] = content_type
         # process the form parameters
         # process the body parameter
         if create_document_from_url_request is not None:
             _body_params = create_document_from_url_request
 
-
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
+        if "Accept" not in _header_params:
+            _header_params["Accept"] = self.api_client.select_header_accept(
+                ["application/json"]
             )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-            'api_auth'
-        ]
+        _auth_settings: List[str] = ["api_auth"]
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/document/create_document_from_url',
+            method="POST",
+            resource_path="/document/create_document_from_url",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -632,23 +616,24 @@ class DocumentApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_document(
         self,
-        document_id: Annotated[StrictStr, Field(description="The unique identifier of the document for which status and metadata is being retrieved.<br><br>This value is returned in the response of the <a href=\"/api-docs/commerce/media/resources/document/methods/createDocument\" target=\"_blank\">createDocument</a> method.")],
+        document_id: Annotated[
+            StrictStr,
+            Field(
+                description='The unique identifier of the document for which status and metadata is being retrieved.<br><br>This value is returned in the response of the <a href="/api-docs/commerce/media/resources/document/methods/createDocument" target="_blank">createDocument</a> method.'
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -681,25 +666,24 @@ class DocumentApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_document_serialize(
             document_id=document_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DocumentResponse",
-            '400': None,
-            '404': None,
-            '500': None,
+            "200": "DocumentResponse",
+            "400": None,
+            "404": None,
+            "500": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -707,18 +691,21 @@ class DocumentApi:
             response_types_map=_response_types_map,
         ).data
 
-
     @validate_call
     def get_document_with_http_info(
         self,
-        document_id: Annotated[StrictStr, Field(description="The unique identifier of the document for which status and metadata is being retrieved.<br><br>This value is returned in the response of the <a href=\"/api-docs/commerce/media/resources/document/methods/createDocument\" target=\"_blank\">createDocument</a> method.")],
+        document_id: Annotated[
+            StrictStr,
+            Field(
+                description='The unique identifier of the document for which status and metadata is being retrieved.<br><br>This value is returned in the response of the <a href="/api-docs/commerce/media/resources/document/methods/createDocument" target="_blank">createDocument</a> method.'
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -751,25 +738,24 @@ class DocumentApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_document_serialize(
             document_id=document_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DocumentResponse",
-            '400': None,
-            '404': None,
-            '500': None,
+            "200": "DocumentResponse",
+            "400": None,
+            "404": None,
+            "500": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -777,18 +763,21 @@ class DocumentApi:
             response_types_map=_response_types_map,
         )
 
-
     @validate_call
     def get_document_without_preload_content(
         self,
-        document_id: Annotated[StrictStr, Field(description="The unique identifier of the document for which status and metadata is being retrieved.<br><br>This value is returned in the response of the <a href=\"/api-docs/commerce/media/resources/document/methods/createDocument\" target=\"_blank\">createDocument</a> method.")],
+        document_id: Annotated[
+            StrictStr,
+            Field(
+                description='The unique identifier of the document for which status and metadata is being retrieved.<br><br>This value is returned in the response of the <a href="/api-docs/commerce/media/resources/document/methods/createDocument" target="_blank">createDocument</a> method.'
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -821,28 +810,26 @@ class DocumentApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_document_serialize(
             document_id=document_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DocumentResponse",
-            '400': None,
-            '404': None,
-            '500': None,
+            "200": "DocumentResponse",
+            "400": None,
+            "404": None,
+            "500": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         return response_data.response
-
 
     def _get_document_serialize(
         self,
@@ -852,14 +839,10 @@ class DocumentApi:
         _headers,
         _host_index,
     ) -> RequestSerialized:
-
-        _hosts = [
-            'https://api.ebay.com{basePath}'
-        ]
+        _hosts = ["https://api.ebay.com{basePath}"]
         _host = _hosts[_host_index]
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -872,30 +855,24 @@ class DocumentApi:
 
         # process the path parameters
         if document_id is not None:
-            _path_params['document_id'] = document_id
+            _path_params["document_id"] = document_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
+        if "Accept" not in _header_params:
+            _header_params["Accept"] = self.api_client.select_header_accept(
+                ["application/json"]
             )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-            'api_auth'
-        ]
+        _auth_settings: List[str] = ["api_auth"]
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/document/{document_id}',
+            method="GET",
+            resource_path="/document/{document_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -905,24 +882,33 @@ class DocumentApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def upload_document(
         self,
-        document_id: Annotated[StrictStr, Field(description="The unique identifier of the document to be uploaded.<br><br>This value is returned in the response of the <a href=\"/api-docs/commerce/media/resources/document/methods/createDocument\" target=\"_blank\">createDocument</a> method.")],
-        content_type: Annotated[StrictStr, Field(description="This header indicates the format of the request body provided by the client. Its value should be set to <b>multipart/form-data</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.")],
+        document_id: Annotated[
+            StrictStr,
+            Field(
+                description='The unique identifier of the document to be uploaded.<br><br>This value is returned in the response of the <a href="/api-docs/commerce/media/resources/document/methods/createDocument" target="_blank">createDocument</a> method.'
+            ),
+        ],
+        content_type: Annotated[
+            StrictStr,
+            Field(
+                description='This header indicates the format of the request body provided by the client. Its value should be set to <b>multipart/form-data</b>. <br><br> For more information, refer to <a href="/api-docs/static/rest-request-components.html#HTTP" target="_blank ">HTTP request headers</a>.'
+            ),
+        ],
+        files: Annotated[
+            Dict[StrictStr, Any], Field(description="The file to be uploaded")
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -957,26 +943,26 @@ class DocumentApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._upload_document_serialize(
             document_id=document_id,
             content_type=content_type,
+            files=files,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DocumentResponse",
-            '400': None,
-            '404': None,
-            '500': None,
+            "200": "DocumentResponse",
+            "400": None,
+            "404": None,
+            "500": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -984,19 +970,30 @@ class DocumentApi:
             response_types_map=_response_types_map,
         ).data
 
-
     @validate_call
     def upload_document_with_http_info(
         self,
-        document_id: Annotated[StrictStr, Field(description="The unique identifier of the document to be uploaded.<br><br>This value is returned in the response of the <a href=\"/api-docs/commerce/media/resources/document/methods/createDocument\" target=\"_blank\">createDocument</a> method.")],
-        content_type: Annotated[StrictStr, Field(description="This header indicates the format of the request body provided by the client. Its value should be set to <b>multipart/form-data</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.")],
+        document_id: Annotated[
+            StrictStr,
+            Field(
+                description='The unique identifier of the document to be uploaded.<br><br>This value is returned in the response of the <a href="/api-docs/commerce/media/resources/document/methods/createDocument" target="_blank">createDocument</a> method.'
+            ),
+        ],
+        content_type: Annotated[
+            StrictStr,
+            Field(
+                description='This header indicates the format of the request body provided by the client. Its value should be set to <b>multipart/form-data</b>. <br><br> For more information, refer to <a href="/api-docs/static/rest-request-components.html#HTTP" target="_blank ">HTTP request headers</a>.'
+            ),
+        ],
+        files: Annotated[
+            Dict[StrictStr, Any], Field(description="The file to be uploaded")
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1031,26 +1028,26 @@ class DocumentApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._upload_document_serialize(
             document_id=document_id,
             content_type=content_type,
+            files=files,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DocumentResponse",
-            '400': None,
-            '404': None,
-            '500': None,
+            "200": "DocumentResponse",
+            "400": None,
+            "404": None,
+            "500": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -1058,19 +1055,30 @@ class DocumentApi:
             response_types_map=_response_types_map,
         )
 
-
     @validate_call
     def upload_document_without_preload_content(
         self,
-        document_id: Annotated[StrictStr, Field(description="The unique identifier of the document to be uploaded.<br><br>This value is returned in the response of the <a href=\"/api-docs/commerce/media/resources/document/methods/createDocument\" target=\"_blank\">createDocument</a> method.")],
-        content_type: Annotated[StrictStr, Field(description="This header indicates the format of the request body provided by the client. Its value should be set to <b>multipart/form-data</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.")],
+        document_id: Annotated[
+            StrictStr,
+            Field(
+                description='The unique identifier of the document to be uploaded.<br><br>This value is returned in the response of the <a href="/api-docs/commerce/media/resources/document/methods/createDocument" target="_blank">createDocument</a> method.'
+            ),
+        ],
+        content_type: Annotated[
+            StrictStr,
+            Field(
+                description='This header indicates the format of the request body provided by the client. Its value should be set to <b>multipart/form-data</b>. <br><br> For more information, refer to <a href="/api-docs/static/rest-request-components.html#HTTP" target="_blank ">HTTP request headers</a>.'
+            ),
+        ],
+        files: Annotated[
+            Dict[StrictStr, Any], Field(description="The file to be uploaded")
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1105,47 +1113,43 @@ class DocumentApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._upload_document_serialize(
             document_id=document_id,
             content_type=content_type,
+            files=files,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DocumentResponse",
-            '400': None,
-            '404': None,
-            '500': None,
+            "200": "DocumentResponse",
+            "400": None,
+            "404": None,
+            "500": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         return response_data.response
-
 
     def _upload_document_serialize(
         self,
         document_id,
         content_type,
+        files,
         _request_auth,
         _content_type,
         _headers,
         _host_index,
     ) -> RequestSerialized:
-
-        _hosts = [
-            'https://api.ebay.com{basePath}'
-        ]
+        _hosts = ["https://api.ebay.com{basePath}"]
         _host = _hosts[_host_index]
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -1153,37 +1157,31 @@ class DocumentApi:
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
+        ] = files
         _body_params: Optional[bytes] = None
 
         # process the path parameters
         if document_id is not None:
-            _path_params['document_id'] = document_id
+            _path_params["document_id"] = document_id
         # process the query parameters
         # process the header parameters
         if content_type is not None:
-            _header_params['Content-Type'] = content_type
+            _header_params["Content-Type"] = content_type
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
+        if "Accept" not in _header_params:
+            _header_params["Accept"] = self.api_client.select_header_accept(
+                ["application/json"]
             )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-            'api_auth'
-        ]
+        _auth_settings: List[str] = ["api_auth"]
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/document/{document_id}/upload',
+            method="POST",
+            resource_path="/document/{document_id}/upload",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1193,7 +1191,5 @@ class DocumentApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
