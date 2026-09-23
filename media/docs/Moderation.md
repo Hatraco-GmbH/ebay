@@ -6,7 +6,7 @@ A container that provides video moderation information when calling the <strong>
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**reject_reasons** | **List[str]** | The reason(s) why the specified video was blocked by moderators. | [optional] 
+**reject_reasons** | [**List[RejectReasonEnum]**](RejectReasonEnum.md) | The reason(s) why the specified video was blocked by moderators. | [optional] 
 
 ## Example
 

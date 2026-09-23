@@ -1,15 +1,15 @@
 # CreateVideoRequest
 
-The request to create a video, which must contain the video's <b>title</b>, <b>size</b>, and <b>classification</b>. <b>Description</b> is an optional field when creating videos.
+The request to create a video, which must contain the video's <strong>title</strong>, <strong>size</strong>, and <strong>classification</strong>. <strong>Description</strong> is an optional field when creating videos.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**classification** | **List[str]** | The intended use for this video content. Currently, videos can only be added and associated with eBay listings, so the only supported value is &lt;code&gt;ITEM&lt;/code&gt;. | [optional] 
+**classification** | [**List[Classification]**](Classification.md) | The intended use for this video content. Currently, videos can only be added and associated with eBay listings, so the only supported value is &lt;code&gt;ITEM&lt;/code&gt;. | 
 **description** | **str** | The description of the video. | [optional] 
-**size** | **int** | The size, in bytes, of the video content. &lt;br&gt;&lt;br&gt;&lt;b&gt;Max:&lt;/b&gt; 157,286,400 bytes | [optional] 
-**title** | **str** | The title of the video. | [optional] 
+**size** | **int** | The size, in bytes, of the video content. &lt;br&gt;&lt;br&gt;&lt;strong&gt;Max:&lt;/strong&gt; 157,286,400 bytes | 
+**title** | **str** | The title of the video. | 
 
 ## Example
 

@@ -6,8 +6,8 @@ This type contains the metadata used to create the document ID.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**document_type** | **str** | The type of the document being uploaded. For example, a &lt;code&gt;USER_GUIDE_OR_MANUAL&lt;/code&gt; or a &lt;code&gt;SAFETY_DATA_SHEET&lt;/code&gt;. For implementation help, refer to &lt;a href&#x3D;&#39;https://developer.ebay.com/api-docs/commerce/media/types/api:DocumentTypeEnum&#39;&gt;eBay API documentation&lt;/a&gt; | [optional] 
-**languages** | **List[str]** | This array shows the language(s) used in the document. | [optional] 
+**document_type** | [**DocumentTypeEnum**](DocumentTypeEnum.md) | The type of the document being uploaded. For example, a &lt;code&gt;USER_GUIDE_OR_MANUAL&lt;/code&gt; or a &lt;code&gt;SAFETY_DATA_SHEET&lt;/code&gt;. | 
+**languages** | [**List[LanguageEnum]**](LanguageEnum.md) | This array shows the language(s) used in the document. | 
 
 ## Example
 

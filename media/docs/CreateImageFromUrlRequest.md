@@ -6,7 +6,7 @@ A type that provides the location of the image.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**image_url** | **str** | The image URL of the self-hosted picture to upload to eBay Picture Services (EPS). In addition to the picture requirements in &lt;a href&#x3D;\&quot;https://www.ebay.com/help/policies/listing-policies/picture-policy?id&#x3D;4370\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Picture policy&lt;/a&gt;, the provided URL must be secured using HTTPS (HTTP is not permitted). For more information, see &lt;a href&#x3D;\&quot;/api-docs/sell/static/inventory/managing-image-media.html#image-requirements\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Image requirements&lt;/a&gt;. | [optional] 
+**image_url** | **str** | The image URL of the self-hosted picture to upload to eBay Picture Services (EPS). In addition to the picture requirements in &lt;a href&#x3D;\&quot;https://www.ebay.com/help/policies/listing-policies/picture-policy?id&#x3D;4370\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Picture policy&lt;/a&gt;, the provided URL must be secured using HTTPS (HTTP is not permitted). For more information, see &lt;a href&#x3D;\&quot;/api-docs/sell/static/inventory/managing-image-media.html#image-requirements\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Image requirements&lt;/a&gt;. | 
 
 ## Example
 

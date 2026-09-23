@@ -1,6 +1,6 @@
 # DocumentMetadata
 
-This type provides information about the <b>documentId</b>.
+This type provides information about the <strong>documentId</strong>.
 
 ## Properties
 
